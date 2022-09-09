@@ -10,11 +10,7 @@ const clientToken = process.env.CLIENT_TOKEN;
 
 // Create new client
 const client: ClientExtend = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildMembers,
-    ],
+    intents: [GatewayIntentBits.Guilds],
 });
 
 //* Récupère les commandes

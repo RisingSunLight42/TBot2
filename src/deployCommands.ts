@@ -13,7 +13,7 @@ if (!clientId || !clientToken || !guildGestionId)
     throw new Error("One of the env variables is undefined.");
 
 export const recupFichier = () => {
-    const commandsGestion = [];
+    const commandsGestion: RESTPostAPIApplicationCommandsJSONBody[] = [];
     const commandFiles = readdirSync(
         path.join(__dirname, ".", "commands")
     ).filter((file) => file.endsWith(".js") || file.endsWith(".ts")); // Récupère les fichiers .js des commandes se situant dans le dossier commands
