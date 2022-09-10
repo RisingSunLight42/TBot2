@@ -1,6 +1,6 @@
 import { Data } from "../types/data";
 
-export const dataProcressing = async (
+export const dataProcessing = async (
     data: Data[],
     jour: number,
     affichage: boolean
@@ -14,7 +14,7 @@ export const dataProcressing = async (
         /*
         Boucle qui permet de check si jamais y'a un week-end pour le passer
         Permet aussi d'ajouter les heures de chaque jour dans la liste arrDataAsked
-        Quand l'utilisateur le demande 
+        Quand l'utilisateur le demande
         */
         const date = new Date(
             `${anneeActuelle}-${moisActuel}-${jourVise} 12:00:00`
