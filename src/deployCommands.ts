@@ -13,7 +13,7 @@ if (!clientId || !clientToken || !guildGestionId)
     throw new Error("One of the env variables is undefined.");
 
 export const recupFichier = () => {
-    const commandsGestion: RESTPostAPIApplicationCommandsJSONBody[] = [];
+    const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
     const commandFiles = readdirSync(
         path.join(__dirname, ".", "commands")
     ).filter((file) => file.endsWith(".js") || file.endsWith(".ts")); // Récupère les fichiers .js des commandes se situant dans le dossier commands
@@ -21,26 +21,31 @@ export const recupFichier = () => {
     for (const file of commandFiles) {
         // Parcours la liste de fichiers
         const command = require(`./commands/${file}`); // Récupère le fichier dans la variable command
-        commandsGestion.push(command.data.toJSON()); // Met la commande en format JSON dans la liste des commandes du serveur de gestion
+        commands.push(command.data.toJSON()); // Met la commande en format JSON dans la liste des commandes du serveur de gestion
     }
-    return commandsGestion;
+    return commands;
 };
 
 const rest = new REST({ version: "10" }).setToken(clientToken); // Récupère l'API Discord
 
-export const deployGestion = async (
-    commandsGestion: RESTPostAPIApplicationCommandsJSONBody[]
+export const deployCommands = async (
+    commands: RESTPostAPIApplicationCommandsJSONBody[],
+    global: boolean
 ) => {
     try {
         // Envoie les commandes (/) du serveur de gestion à l'API pour les utiliser
         await rest.put(
-            Routes.applicationGuildCommands(clientId, guildGestionId),
+            global
+                ? Routes.applicationCommands(clientId)
+                : Routes.applicationGuildCommands(clientId, guildGestionId),
             {
-                body: commandsGestion,
+                body: commands,
             }
         );
         console.log(
-            "🧪 Les commandes (/) du serveur de gestion ont été enregistrées."
+            `🧪 Les commandes (/) ${
+                global ? "globales" : "du serveur de gestion"
+            } ont été enregistrées.`
         );
     } catch (error) {
         console.error(error);
