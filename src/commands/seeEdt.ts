@@ -1,7 +1,11 @@
 // Importe le nécessaire pour réaliser la commande
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+    ChatInputCommandInteraction,
+    SlashCommandBuilder,
+    EmbedBuilder,
+} from "discord.js";
 import { fetchEdt } from "../helpers/functions/fetchEdt";
-import { dataProcressing } from "../helpers/functions/dataProcessing";
+import { dataProcessing } from "../helpers/functions/dataProcessing";
 
 // Crée la commande en faisant une nouvelle commande Slash
 module.exports = {
@@ -26,7 +30,7 @@ module.exports = {
             option
                 .setName("jour")
                 .setDescription(
-                    "Quand par rapport à aujourd'hui tu veux voir l'emploi du temps (les week-ends n'existent pas !)"
+                    "La semaine ne prend pas en compte les W-E, donc aujourd'hui en weed-end donnera Lundi !"
                 )
                 .addChoices(
                     { name: "Aujourd'hui", value: 0 },
@@ -52,7 +56,26 @@ module.exports = {
         const jour = interaction.options.getNumber("jour", true);
         const affichage = interaction.options.getBoolean("affichage", true);
         const edtData = await fetchEdt(classe);
-        const edtDataAsked = await dataProcressing(edtData, jour, affichage);
-        await interaction.reply({ content: "Pong !", ephemeral: true }); // Réponds Pong !
+        const edtDataAsked = await dataProcessing(edtData, jour, affichage);
+
+        const arrEmbed = [];
+        for (const jourData of edtDataAsked) {
+            const embed = new EmbedBuilder().setTitle(
+                `Emploi du Temps du ${jourData[0].jour}/${jourData[0].mois}/${jourData[0].annee}`
+            );
+            for (const heureData of jourData) {
+                embed.addFields({
+                    name: `${heureData.hDebut} - ${heureData.hFin}`,
+                    value: `${heureData.cours}\n${heureData.enseignant}\nSalle : ${heureData.salle}`,
+                });
+            }
+            arrEmbed.push(embed);
+        }
+
+        await interaction.reply({
+            content: "Voici l'emploi du temps demandé !",
+            embeds: arrEmbed,
+            ephemeral: true,
+        });
     },
 };
