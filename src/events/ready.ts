@@ -1,3 +1,4 @@
+import { ActivityType } from "discord.js";
 import { deployCommands, recupFichier } from "../deployCommands"; // Importe la fonction pour déployer les commandes
 import { ClientExtend } from "../helpers/types/clientExtend";
 require("dotenv").config();
@@ -12,6 +13,17 @@ module.exports = {
     once: true,
     execute(client: ClientExtend) {
         console.log(`🟢 Je suis allumé !`);
+
+        client.user?.setPresence({
+            status: "online",
+            activities: [
+                {
+                    name: "son repo Github",
+                    type: ActivityType.Watching,
+                    url: "https://github.com/RisingSunLight42/EduBot",
+                },
+            ],
+        });
 
         //* Push les commandes suivant si les serveurs recherchés sont présents et si c'est le bot principal
         const liste_commandes = recupFichier();
