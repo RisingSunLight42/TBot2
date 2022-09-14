@@ -7,6 +7,29 @@ import {
 import { fetchEdt } from "../helpers/functions/fetchEdt";
 import { dataProcessing } from "../helpers/functions/dataProcessing";
 
+const staticDay: { [name: number]: string } = {
+    1: "Lundi",
+    2: "Mardi",
+    3: "Mercredi",
+    4: "Jeudi",
+    5: "Vendredi",
+};
+
+const staticMonth: { [name: string]: string } = {
+    "01": "Janvier",
+    "02": "Février",
+    "03": "Mars",
+    "04": "Avril",
+    "05": "Mai",
+    "06": "Juin",
+    "07": "Juillet",
+    "08": "Août",
+    "09": "Septembre",
+    "10": "Octobre",
+    "11": "Novembre",
+    "12": "Décembre",
+};
+
 // Crée la commande en faisant une nouvelle commande Slash
 module.exports = {
     data: new SlashCommandBuilder()
@@ -60,8 +83,14 @@ module.exports = {
 
         const arrEmbed = [];
         for (const jourData of edtDataAsked) {
+            const numJour = parseInt(jourData[0].jour);
+            const numMonth = jourData[0].mois;
+            const year = jourData[0].annee;
+            const day = new Date(
+                `${year}-${numMonth}-${numJour} 12:00:00`
+            ).getDay();
             const embed = new EmbedBuilder().setTitle(
-                `Emploi du Temps du ${jourData[0].jour}/${jourData[0].mois}/${jourData[0].annee}`
+                `Emploi du Temps du ${staticDay[day]} ${numJour} ${staticMonth[numMonth]} ${year}`
             );
             for (const heureData of jourData) {
                 embed.addFields({
