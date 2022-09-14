@@ -1,0 +1,67 @@
+{
+    "liens": [
+        {
+            "nom": "Zimbra",
+            "lien": "https://webmail.unicaen.fr/",
+            "image": "https://pic.clubic.com/v1/images/1934730/raw",
+            "couleur": "DarkBlue",
+            "description": "C'est la message de l'université (que tout le monde connaît maintenant normalement).\nRappel : votre mail est \"nom.prenom@etu.unicaen.fr\" (avec votre nom et prénom évidemment)."
+        },
+        {
+            "nom": "Léocarte",
+            "lien": "https://sgc.unicaen.fr/",
+            "image": "https://www.etudiant.gouv.fr/sites/default/files/styles/media_embed_style/public/2021-05/leocarte-5156.png?itok=ngAuHgMf",
+            "couleur": "DarkPurple",
+            "description": "Le site pour faire/commander sa Léocarte, puis la gérer plus tard."
+        },
+        {
+            "nom": "Impression",
+            "lien": "https://impression.unicaen.fr/user",
+            "image": "https://www.bureau-romand.ch/wp-content/uploads/2021/06/Papercut.jpg",
+            "couleur": "Purple",
+            "description": "Le service d'impression, que vous pouvez consuter partout pour voir vos documents prêts à imprimer, ou poser vos fichiers pour une future impression."
+        },
+        {
+            "nom": "Unicloud",
+            "lien": "https://unicloud.unicaen.fr/",
+            "image": "https://static.topcv.vn/company_logos/zaJQ84hX3C6Mv16bXP0dCKYmcuNgSGXf_1648694862____6b975e6906054b4cec122630c5f86b51.png",
+            "couleur": "LuminousVividPink",
+            "description": "Le cloud de l'université. Pour déposer vos fichiers en ligne et les partager avec vos camarades. :cloud: :cloud:"
+        },
+        {
+            "nom": "E-Campus",
+            "lien": "https://ecampus.unicaen.fr/",
+            "image": "https://ecampus.unicaen.fr/pluginfile.php/1/core_admin/logocompact/300x300/1662979919/favicon_ecampus.png",
+            "couleur": "Red",
+            "description": "Le site où les profs mettent toutes les ressources (CM, TD et TP) que vous avez fait en cours (si les profs ont effectivement dit qu'ils le feraient)."
+        },
+        {
+            "nom": "Wiki campus 3",
+            "lien": "https://www.iutcaen.unicaen.fr/dokuc3/",
+            "image": "https://cdn.discordapp.com/attachments/872588994637078589/1019572858806087701/unknown.png",
+            "couleur": "Orange",
+            "description": "Pour avoir toutes les infos sur l'université, plus particulièrement sur le campus 3 (c'est un Wiki quoi)."
+        },
+        {
+            "nom": "Emploi du temps",
+            "lien": "https://zimmermanna.users.greyc.fr/edt/Emploi-du-temps.php",
+            "image": "https://pbs.twimg.com/profile_images/1483008562230083589/ZBEpa1DQ_400x400.jpg",
+            "couleur": "Yellow",
+            "description": "Le site de Mr Zimmermann pour voir l'emploi du temps de votre classe (et des autres, si vous voulez stalker quelqu'un...). Mais je suis là aussi ;)"
+        },
+        {
+            "nom": "Site de Mr Anne",
+            "lien": "https://infoiut.jfanne.fr/",
+            "image": "https://infoiut.jfanne.fr/IMG/logo/siteon0.gif?1648889699",
+            "couleur": "Green",
+            "description": "Le site de Monsieur Annee. C'est comme E-Campus, mais avec que lui parce que pourquoi faire simple ? :upside_down:"
+        },
+        {
+            "nom": "Github du bot",
+            "lien": "https://github.com/RisingSunLight42/EduBot",
+            "image": "https://play-lh.googleusercontent.com/PCpXdqvUWfCW1mXhH1Y_98yBpgsWxuTSTofy3NGMo9yBTATDyzVkqU580bfSln50bFU",
+            "couleur": "Default",
+            "description": "Le code source du bot, si besoin."
+        }
+    ]
+}
