@@ -54,7 +54,9 @@ module.exports = {
         }
 
         await interaction.reply({
-            content: "Voici les liens demandés !",
+            content: lien
+                ? "Voici le lien demandé !"
+                : "Voici les liens demandés !",
             embeds: lien
                 ? arrEmbed.filter((embed) => embed.data.title === lien)
                 : arrEmbed,
