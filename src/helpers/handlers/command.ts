@@ -1,46 +1,15 @@
-import {
-    ChannelType,
-    Permissions,
-    ChatInputCommandInteraction,
-    PermissionResolvable,
-    PermissionFlagsBits,
-} from "discord.js";
+import { ChannelType, ChatInputCommandInteraction } from "discord.js";
 import { ClientExtend } from "../types/clientExtend";
+import {
+    permissionsObject,
+    permissionsSubcommandObject,
+} from "../constants/permissionsObjects";
+import { permissionResolvableObject } from "../constants/permissionsResolvable";
 require("dotenv").config();
 
 const soutsuId = process.env.SOUTSU_ID;
 
 if (!soutsuId) throw new Error("L'ID de Soutsu est manquant !");
-
-const objetPerm: {
-    [key in Permissions]: string[];
-} = {
-    BanMembers: ["ban", "unban"],
-    ManageMessages: ["blacklist", "clear"],
-    KickMembers: ["kick"],
-    ManageRoles: ["mute"],
-    Administrator: [
-        "repete",
-        "role_choice",
-        "settings",
-        "validate_member",
-        "vent",
-        "role_description",
-    ],
-};
-
-const objetPermissionResolvables: { [key: string]: PermissionResolvable } = {
-    BanMembers: PermissionFlagsBits.BanMembers,
-    ManageMessages: PermissionFlagsBits.ManageMessages,
-    KickMembers: PermissionFlagsBits.KickMembers,
-    ManageRoles: PermissionFlagsBits.ManageRoles,
-    Administrator: PermissionFlagsBits.Administrator,
-};
-
-const objetPermSubcommand: { [key: string]: string[] } = {
-    vent: ["moderation"],
-    role_description: ["modify", "remove"],
-};
 
 export const handleCommand = async (
     client: ClientExtend,
@@ -59,12 +28,12 @@ export const handleCommand = async (
         });
 
     //* Vérifie si l'utilisateur a les droits d'admin pour les commandes données
-    for (const [perm, liste_commandes] of Object.entries(objetPerm)) {
+    for (const [perm, liste_commandes] of Object.entries(permissionsObject)) {
         if (
-            !memberPermissions?.has(objetPermissionResolvables[perm]) &&
+            !memberPermissions?.has(permissionResolvableObject[perm]) &&
             liste_commandes.includes(commandName) &&
-            (Object.keys(objetPermSubcommand).includes(commandName)
-                ? objetPermSubcommand[commandName].includes(
+            (Object.keys(permissionsSubcommandObject).includes(commandName)
+                ? permissionsSubcommandObject[commandName].includes(
                       //* Les cas particuliers peuvent fonctionner via SubcommandGroup ou Subcommand
                       (options.getSubcommandGroup()
                           ? options.getSubcommandGroup()
