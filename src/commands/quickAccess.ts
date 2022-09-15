@@ -2,21 +2,9 @@ import {
     ChatInputCommandInteraction,
     SlashCommandBuilder,
     EmbedBuilder,
-    ColorResolvable,
 } from "discord.js";
 import linksJson from "../helpers/datas/link.json";
-
-const colors: { [name: string]: ColorResolvable } = {
-    Default: "#000000",
-    DarkBlue: "#206694",
-    DarkPurple: "#71368A",
-    Purple: "#9B59B6",
-    LuminousVividPink: "#E91E63",
-    Red: "#ED4245",
-    Orange: "#E67E22",
-    Yellow: "#FFFF00",
-    Green: "#57F287",
-};
+import { colors } from "../helpers/constants/colorsCode";
 
 // Crée la commande en faisant une nouvelle commande Slash
 module.exports = {

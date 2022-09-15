@@ -6,29 +6,8 @@ import {
 } from "discord.js";
 import { fetchEdt } from "../helpers/functions/fetchEdt";
 import { dataProcessing } from "../helpers/functions/dataProcessing";
-
-const staticDay: { [name: number]: string } = {
-    1: "Lundi",
-    2: "Mardi",
-    3: "Mercredi",
-    4: "Jeudi",
-    5: "Vendredi",
-};
-
-const staticMonth: { [name: string]: string } = {
-    "01": "Janvier",
-    "02": "Février",
-    "03": "Mars",
-    "04": "Avril",
-    "05": "Mai",
-    "06": "Juin",
-    "07": "Juillet",
-    "08": "Août",
-    "09": "Septembre",
-    "10": "Octobre",
-    "11": "Novembre",
-    "12": "Décembre",
-};
+import { staticDay } from "../helpers/constants/daysCode";
+import { staticMonth } from "../helpers/constants/monthsCode";
 
 // Crée la commande en faisant une nouvelle commande Slash
 module.exports = {
