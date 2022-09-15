@@ -4,7 +4,7 @@ import {
     ChatInputCommandInteraction,
     PermissionResolvable,
     PermissionFlagsBits,
-} from "discord.js"; // Import des classes nécessaires pour les commandes
+} from "discord.js";
 import { ClientExtend } from "../types/clientExtend";
 require("dotenv").config();
 
@@ -12,7 +12,6 @@ const soutsuId = process.env.SOUTSU_ID;
 
 if (!soutsuId) throw new Error("L'ID de Soutsu est manquant !");
 
-// Crée l'objet de perm pour loop dessus et check si le membre a les permissions
 const objetPerm: {
     [key in Permissions]: string[];
 } = {
@@ -38,7 +37,6 @@ const objetPermissionResolvables: { [key: string]: PermissionResolvable } = {
     Administrator: PermissionFlagsBits.Administrator,
 };
 
-// Crée l'objet pour les commandes qui demandent des autorisations sur des subcommandes
 const objetPermSubcommand: { [key: string]: string[] } = {
     vent: ["moderation"],
     role_description: ["modify", "remove"],
@@ -50,9 +48,9 @@ export const handleCommand = async (
 ) => {
     const { commandName, options, channel, memberPermissions, user } =
         interaction;
-    const command = client.commands?.get(commandName); // Récupère la commande exécutée
+    const command = client.commands?.get(commandName);
 
-    if (!command) return; // Il ne fait rien si la commande est vide
+    if (!command) return;
     if (channel?.type === ChannelType.DM)
         return await interaction.reply({
             content:
@@ -61,7 +59,6 @@ export const handleCommand = async (
         });
 
     //* Vérifie si l'utilisateur a les droits d'admin pour les commandes données
-    // Boucle sur l'objet et vérifie si le membre n'a pas les permissions et que la commandes n'est pas dans la liste
     for (const [perm, liste_commandes] of Object.entries(objetPerm)) {
         if (
             !memberPermissions?.has(objetPermissionResolvables[perm]) &&
@@ -69,10 +66,9 @@ export const handleCommand = async (
             (Object.keys(objetPermSubcommand).includes(commandName)
                 ? objetPermSubcommand[commandName].includes(
                       //* Les cas particuliers peuvent fonctionner via SubcommandGroup ou Subcommand
-                      (options.getSubcommandGroup() // On test s'il y a des subcommandgroup
-                          ? options.getSubcommandGroup() // si oui, on envoie le nom du groupe
+                      (options.getSubcommandGroup()
+                          ? options.getSubcommandGroup()
                           : options.getSubcommand()) ?? "STRING_GUARD"
-                      // Si non, on envoie le nom de la subcommand
                   )
                 : true)
         )

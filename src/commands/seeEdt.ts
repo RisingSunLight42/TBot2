@@ -9,7 +9,6 @@ import { dataProcessing } from "../helpers/functions/dataProcessing";
 import { staticDay } from "../helpers/constants/daysCode";
 import { staticMonth } from "../helpers/constants/monthsCode";
 
-// Crée la commande en faisant une nouvelle commande Slash
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("edt")

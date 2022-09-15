@@ -16,24 +16,22 @@ export const recupFichier = () => {
     const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
     const commandFiles = readdirSync(
         path.join(__dirname, ".", "commands")
-    ).filter((file) => file.endsWith(".js") || file.endsWith(".ts")); // Récupère les fichiers .js des commandes se situant dans le dossier commands
+    ).filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
 
     for (const file of commandFiles) {
-        // Parcours la liste de fichiers
-        const command = require(`./commands/${file}`); // Récupère le fichier dans la variable command
-        commands.push(command.data.toJSON()); // Met la commande en format JSON dans la liste des commandes du serveur de gestion
+        const command = require(`./commands/${file}`);
+        commands.push(command.data.toJSON());
     }
     return commands;
 };
 
-const rest = new REST({ version: "10" }).setToken(clientToken); // Récupère l'API Discord
+const rest = new REST({ version: "10" }).setToken(clientToken);
 
 export const deployCommands = async (
     commands: RESTPostAPIApplicationCommandsJSONBody[],
     global: boolean
 ) => {
     try {
-        // Envoie les commandes (/) du serveur de gestion à l'API pour les utiliser
         await rest.put(
             global
                 ? Routes.applicationCommands(clientId)

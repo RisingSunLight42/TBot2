@@ -6,7 +6,6 @@ import {
 import linksJson from "../helpers/datas/link.json";
 import { colors } from "../helpers/constants/colorsCode";
 
-// Crée la commande en faisant une nouvelle commande Slash
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("liens")

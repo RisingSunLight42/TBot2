@@ -12,9 +12,8 @@ export const dataProcessing = async (
 
     for (let i = 0; i < jour; i++) {
         /*
-        Boucle qui permet de check si jamais y'a un week-end pour le passer
-        Permet aussi d'ajouter les heures de chaque jour dans la liste arrDataAsked
-        Quand l'utilisateur le demande
+        For loop wich check if we are in a week-end to skip it.
+        Also add every hours of every days if the user asks
         */
         const date = new Date(
             `${anneeActuelle}-${moisActuel}-${jourVise} 12:00:00`
@@ -27,7 +26,7 @@ export const dataProcessing = async (
         jourVise += 1;
     }
 
-    //  Fait un dernier check car dans la forme de la boucle, le dernier jour n'est pas traité
+    // Do a last check because the last day is not parsed in the loop
     const date = new Date(
         `${anneeActuelle}-${moisActuel}-${jourVise} 12:00:00`
     );

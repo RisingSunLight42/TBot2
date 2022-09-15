@@ -29,11 +29,9 @@ module.exports = {
         const liste_commandes = recupFichier();
         deployCommands(liste_commandes, true);
         client.guilds.fetch().then(function (result) {
-            const guild_liste_snowflake = result.map((objet) => objet.id); // Récupère les ids de guild du bot dans une liste
-            if (guild_liste_snowflake.includes(guildGestionId)) {
-                // S'il y a le serveur de gestion, push les commandes de gestion
+            const guild_liste_snowflake = result.map((objet) => objet.id);
+            if (guild_liste_snowflake.includes(guildGestionId))
                 deployCommands(liste_commandes, false);
-            }
         });
     },
 };
