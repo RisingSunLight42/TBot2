@@ -14,10 +14,10 @@ Une description claire et concise de ce qu'est le bug.
 
 Marche à suivre pour le reproduire :
 
-1.
-2.
-3.
-4.
+1. Ouvrir Discord
+2. Aller sur un salon où les commandes sont disponibles
+3. Taper la commande...
+4. Observer ce qui se passe
 
 ## Comportement(s) attendu(s)
 
