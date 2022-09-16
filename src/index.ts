@@ -2,6 +2,9 @@
 import { Client, GatewayIntentBits, Collection } from "discord.js";
 import { readdirSync } from "fs";
 import { ClientExtend } from "./helpers/types/clientExtend";
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+import { firebaseConfig } from "./helpers/constants/firebaseConfig";
 import path from "path";
 require("dotenv").config();
 
@@ -35,5 +38,7 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
+
+client.database = getDatabase(initializeApp(firebaseConfig));
 
 client.login(clientToken);

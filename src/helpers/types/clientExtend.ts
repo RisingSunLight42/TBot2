@@ -4,6 +4,7 @@ import {
     Collection,
     RESTPostAPIApplicationCommandsJSONBody,
 } from "discord.js";
+import { Database } from "firebase/database";
 
 export interface ClientExtend extends Client {
     commands?: Collection<
@@ -13,4 +14,5 @@ export interface ClientExtend extends Client {
             execute: AsyncGeneratorFunction;
         }
     >;
+    database?: Database;
 }
