@@ -1,6 +1,6 @@
 import { Data } from "../types/data";
 
-export const dataProcessing = async (
+export const dataEdtProcessing = async (
     data: Data[],
     jour: number,
     affichage: boolean

@@ -5,7 +5,7 @@ import {
     EmbedBuilder,
 } from "discord.js";
 import { fetchEdt } from "../helpers/functions/fetchEdt";
-import { dataProcessing } from "../helpers/functions/dataProcessing";
+import { dataEdtProcessing } from "../helpers/functions/dataEdtProcessing";
 import { staticDay } from "../helpers/constants/daysCode";
 import { staticMonth } from "../helpers/constants/monthsCode";
 
@@ -57,7 +57,7 @@ module.exports = {
         const jour = interaction.options.getNumber("jour", true);
         const affichage = interaction.options.getBoolean("affichage", true);
         const edtData = await fetchEdt(classe);
-        const edtDataAsked = await dataProcessing(edtData, jour, affichage);
+        const edtDataAsked = await dataEdtProcessing(edtData, jour, affichage);
 
         const arrEmbed = [];
         for (const jourData of edtDataAsked) {
