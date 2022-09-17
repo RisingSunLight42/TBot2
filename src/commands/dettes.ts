@@ -1,9 +1,6 @@
-import {
-    ChatInputCommandInteraction,
-    EmbedBuilder,
-    SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { ref, get, child } from "firebase/database";
+import { dataDettesProcessing } from "../helpers/functions/dataDettesProcessing";
 import { ClientExtend } from "../helpers/types/clientExtend";
 
 module.exports = {
@@ -21,16 +18,7 @@ module.exports = {
 
         const Dettesref = ref(client.database);
         get(child(Dettesref, "dettes/")).then(async (snapshot) => {
-            const data: { [name: string]: { [name: string]: string } } =
-                snapshot.val();
-            const embed = new EmbedBuilder().setTitle("Les DETTES");
-            for (const key in data) {
-                let textField: string = "";
-                for (const textKey of Object.keys(data[key])) {
-                    textField += `${textKey} : ${data[key][textKey]}\n`;
-                }
-                embed.addFields({ name: `Pour ${key}`, value: textField });
-            }
+            const embed = dataDettesProcessing(snapshot.val());
 
             await interaction.reply({
                 embeds: [embed],

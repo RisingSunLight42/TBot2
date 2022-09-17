@@ -1,7 +1,8 @@
-import { ActivityType, EmbedBuilder } from "discord.js";
+import { ActivityType } from "discord.js";
 import { deployCommands, recupFichier } from "../deployCommands"; // Importe la fonction pour déployer les commandes
 import { ClientExtend } from "../helpers/types/clientExtend";
 import { ref, get, child } from "firebase/database";
+import { dataDettesProcessing } from "../helpers/functions/dataDettesProcessing";
 const CronJob = require("cron").CronJob;
 require("dotenv").config();
 
@@ -42,21 +43,7 @@ module.exports = {
                 if (!client.database) return;
                 const Dettesref = ref(client.database);
                 get(child(Dettesref, "dettes/")).then(async (snapshot) => {
-                    const data: { [name: string]: { [name: string]: string } } =
-                        snapshot.val();
-                    const embed = new EmbedBuilder().setTitle(
-                        "Les DETTES du jour"
-                    );
-                    for (const key in data) {
-                        let textField: string = "";
-                        for (const textKey of Object.keys(data[key])) {
-                            textField += `${textKey} : ${data[key][textKey]}\n`;
-                        }
-                        embed.addFields({
-                            name: `Pour ${key}`,
-                            value: textField,
-                        });
-                    }
+                    const embed = dataDettesProcessing(snapshot.val());
 
                     const channel = await client.channels.fetch(
                         "1016397992674218035"
