@@ -1,11 +1,11 @@
 import {
     ChatInputCommandInteraction,
     SlashCommandBuilder,
-    EmbedBuilder,
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
 } from "discord.js";
+import { embedGenerator } from "../helpers/generators/embed";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,12 +13,12 @@ module.exports = {
         .setDescription("Permet d'avoir les liens relatifs au bot aisément."),
 
     async execute(interaction: ChatInputCommandInteraction) {
-        const embed = new EmbedBuilder()
-            .setTitle("EduBot")
-            .setDescription(
-                "EduBot est un bot Discord réalisé principalement par RisingSunLight pour les 1ere année du BUT Informatique d'Ifs. Celui-ci est open source et est ouvert à tous ajouts de qualité."
-            )
-            .setFooter({ text: "Version 2.1.0" });
+        const embed = embedGenerator({
+            title: "EduBot",
+            description:
+                "EduBot est un bot Discord réalisé principalement par RisingSunLight pour les 1ere année du BUT Informatique d'Ifs. Celui-ci est open source et est ouvert à tous ajouts de qualité.",
+            footer: { text: "Version 2.3.0" },
+        });
 
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
             new ButtonBuilder()

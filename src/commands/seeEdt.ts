@@ -1,13 +1,10 @@
 // Importe le nécessaire pour réaliser la commande
-import {
-    ChatInputCommandInteraction,
-    SlashCommandBuilder,
-    EmbedBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { fetchEdt } from "../helpers/functions/fetchEdt";
 import { dataEdtProcessing } from "../helpers/functions/dataEdtProcessing";
 import { staticDay } from "../helpers/constants/daysCode";
 import { staticMonth } from "../helpers/constants/monthsCode";
+import { embedGenerator } from "../helpers/generators/embed";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -67,16 +64,19 @@ module.exports = {
             const day = new Date(
                 `${year}-${numMonth}-${numJour} 12:00:00`
             ).getDay();
-            const embed = new EmbedBuilder().setTitle(
-                `Emploi du Temps du ${staticDay[day]} ${numJour} ${staticMonth[numMonth]} ${year}`
-            );
+            const arrFields = [];
             for (const heureData of jourData) {
-                embed.addFields({
+                arrFields.push({
                     name: `${heureData.hDebut} - ${heureData.hFin}`,
                     value: `${heureData.cours}\n${heureData.enseignant}\nSalle : ${heureData.salle}`,
                 });
             }
-            arrEmbed.push(embed);
+            arrEmbed.push(
+                embedGenerator({
+                    title: `Emploi du Temps du ${staticDay[day]} ${numJour} ${staticMonth[numMonth]} ${year}`,
+                    fields: arrFields,
+                })
+            );
         }
 
         await interaction.reply({

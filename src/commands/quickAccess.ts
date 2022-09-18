@@ -1,10 +1,6 @@
-import {
-    ChatInputCommandInteraction,
-    SlashCommandBuilder,
-    EmbedBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import linksJson from "../helpers/datas/link.json";
-import { colors } from "../helpers/constants/colorsCode";
+import { embedGenerator } from "../helpers/generators/embed";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -31,13 +27,15 @@ module.exports = {
         const arrEmbed = [];
         const lien = interaction.options.getString("lien");
         for (const linkItem of linksJson.liens) {
-            const embed = new EmbedBuilder()
-                .setTitle(linkItem.nom)
-                .setURL(linkItem.lien)
-                .setColor(colors[linkItem.couleur])
-                .setDescription(linkItem.description)
-                .setThumbnail(linkItem.image);
-            arrEmbed.push(embed);
+            arrEmbed.push(
+                embedGenerator({
+                    title: linkItem.nom,
+                    url: linkItem.lien,
+                    color: linkItem.couleur,
+                    description: linkItem.description,
+                    thumbnail: linkItem.image,
+                })
+            );
         }
 
         await interaction.reply({
