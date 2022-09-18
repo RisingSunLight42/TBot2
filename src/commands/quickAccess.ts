@@ -1,5 +1,10 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import linksJson from "../helpers/datas/link.json";
+import {
+    ChatInputCommandInteraction,
+    EmbedBuilder,
+    SlashCommandBuilder,
+} from "discord.js";
+import { ref, get, child } from "firebase/database";
+import { ClientExtend } from "../helpers/types/clientExtend";
 import { embedGenerator } from "../helpers/generators/embed";
 
 module.exports = {
@@ -24,28 +29,36 @@ module.exports = {
         ),
 
     async execute(interaction: ChatInputCommandInteraction) {
-        const arrEmbed = [];
-        const lien = interaction.options.getString("lien");
-        for (const linkItem of linksJson.liens) {
-            arrEmbed.push(
-                embedGenerator({
-                    title: linkItem.nom,
-                    url: linkItem.lien,
-                    color: linkItem.couleur,
-                    description: linkItem.description,
-                    thumbnail: linkItem.image,
-                })
-            );
-        }
+        const client: ClientExtend = interaction.client;
+        if (!client.database)
+            return await interaction.reply({
+                content: "Je n'ai pas pu trouver ma base de données :/",
+                ephemeral: true,
+            });
 
-        await interaction.reply({
-            content: lien
-                ? "Voici le lien demandé !"
-                : "Voici les liens demandés !",
-            embeds: lien
-                ? arrEmbed.filter((embed) => embed.data.title === lien)
-                : arrEmbed,
-            ephemeral: true,
+        const arrEmbed: EmbedBuilder[] = [];
+        const lien = interaction.options.getString("lien");
+        const Liensref = ref(client.database);
+        get(child(Liensref, "liens/")).then(async (snapshot) => {
+            for (const site of snapshot.val())
+                arrEmbed.push(
+                    embedGenerator({
+                        title: site.nom,
+                        color: site.couleur,
+                        description: site.description,
+                        url: site.lien,
+                        thumbnail: site.image,
+                    })
+                );
+            await interaction.reply({
+                content: lien
+                    ? "Voici le lien demandé !"
+                    : "Voici les liens demandés !",
+                embeds: lien
+                    ? arrEmbed.filter((embed) => embed.data.title === lien)
+                    : arrEmbed,
+                ephemeral: true,
+            });
         });
     },
 };
