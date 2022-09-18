@@ -24,7 +24,11 @@ module.exports = {
                     { name: "Wiki campus 3", value: "Wiki campus 3" },
                     { name: "Emploi du temps", value: "Emploi du temps" },
                     { name: "Site de Mr Anne", value: "Site de Mr Anne" },
-                    { name: "Github du bot", value: "Github du bot" }
+                    { name: "Github du bot", value: "Github du bot" },
+                    {
+                        name: "Planning des contrôles",
+                        value: "Planning des contrôles",
+                    }
                 )
         ),
 
