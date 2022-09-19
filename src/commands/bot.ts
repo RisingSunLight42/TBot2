@@ -17,7 +17,7 @@ module.exports = {
             title: "EduBot",
             description:
                 "EduBot est un bot Discord réalisé principalement par RisingSunLight pour les 1ere année du BUT Informatique d'Ifs. Celui-ci est open source et est ouvert à tous ajouts de qualité.",
-            footer: { text: "Version 2.4.2" },
+            footer: { text: "Version 2.4.3" },
         });
 
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
