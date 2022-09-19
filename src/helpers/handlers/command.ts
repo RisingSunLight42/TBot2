@@ -7,9 +7,9 @@ import {
 import { permissionResolvableObject } from "../constants/permissionsResolvable";
 require("dotenv").config();
 
-const soutsuId = process.env.SOUTSU_ID;
+const gestionnaireId = process.env.GESTIONNAIRE_ID;
 
-if (!soutsuId) throw new Error("L'ID de Soutsu est manquant !");
+if (!gestionnaireId) throw new Error("L'ID du gestionnaire est manquant !");
 
 export const handleCommand = async (
     client: ClientExtend,
@@ -52,8 +52,8 @@ export const handleCommand = async (
         command.execute(interaction);
     } catch (error) {
         console.error(error);
-        const soutsu = await client.users.fetch(soutsuId);
-        await soutsu.send(
+        const gestionnaire = await client.users.fetch(gestionnaireId);
+        await gestionnaire.send(
             `Une erreur a été rencontrée lors de l'utilisation de la commande ${commandName} par ${user.tag}.`
         );
         await interaction.reply({
