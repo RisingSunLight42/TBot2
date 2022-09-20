@@ -1,6 +1,8 @@
 import {
+    ActionRowBuilder,
     ChatInputCommandInteraction,
     EmbedBuilder,
+    SelectMenuBuilder,
     SlashCommandBuilder,
 } from "discord.js";
 import { ref, get, child } from "firebase/database";
@@ -11,25 +13,13 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("liens")
         .setDescription("Permet d'avoir les liens utiles rapidement.")
-        .addStringOption((option) =>
+        .addBooleanOption((option) =>
             option
-                .setName("lien")
-                .setDescription("Le lien que tu souhaites avoir")
-                .addChoices(
-                    { name: "Zimbra", value: "Zimbra" },
-                    { name: "Léocarte", value: "Léocarte" },
-                    { name: "Impression", value: "Impression" },
-                    { name: "Unicloud", value: "Unicloud" },
-                    { name: "E-Campus", value: "E-Campus" },
-                    { name: "Wiki campus 3", value: "Wiki campus 3" },
-                    { name: "Emploi du temps", value: "Emploi du temps" },
-                    { name: "Site de Mr Anne", value: "Site de Mr Anne" },
-                    { name: "Github du bot", value: "Github du bot" },
-                    {
-                        name: "Planning des contrôles",
-                        value: "Planning des contrôles",
-                    }
+                .setName("choix")
+                .setDescription(
+                    "Veux-tu avoir le choix sur les liens que tu souhaites voir ?"
                 )
+                .setRequired(true)
         ),
 
     async execute(interaction: ChatInputCommandInteraction) {
@@ -41,10 +31,15 @@ module.exports = {
             });
 
         const arrEmbed: EmbedBuilder[] = [];
-        const lien = interaction.options.getString("lien");
+        const row = new ActionRowBuilder<SelectMenuBuilder>().addComponents(
+            new SelectMenuBuilder()
+                .setCustomId("linksSelect")
+                .setPlaceholder("Aucun lien sélectionné")
+        );
+        const choix = interaction.options.getBoolean("choix", true);
         const Liensref = ref(client.database);
         get(child(Liensref, "liens/")).then(async (snapshot) => {
-            for (const site of snapshot.val())
+            for (const site of snapshot.val()) {
                 arrEmbed.push(
                     embedGenerator({
                         title: site.nom,
@@ -54,13 +49,21 @@ module.exports = {
                         thumbnail: site.image,
                     })
                 );
+
+                row.components[0].addOptions({
+                    label: site.nom,
+                    description: `Lien pour le site ${site.nom}`,
+                    value: site.nom,
+                });
+            }
+
+            client.links = arrEmbed;
             await interaction.reply({
-                content: lien
-                    ? "Voici le lien demandé !"
+                content: choix
+                    ? "Voici la liste des liens demandés !"
                     : "Voici les liens demandés !",
-                embeds: lien
-                    ? arrEmbed.filter((embed) => embed.data.title === lien)
-                    : arrEmbed,
+                embeds: choix ? [] : arrEmbed,
+                components: choix ? [row] : [],
                 ephemeral: true,
             });
         });
