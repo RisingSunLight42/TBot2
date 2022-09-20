@@ -1,5 +1,9 @@
 // Importe le nécessaire pour réaliser la commande
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+    ChannelType,
+    ChatInputCommandInteraction,
+    SlashCommandBuilder,
+} from "discord.js";
 import { fetchEdt } from "../helpers/functions/fetchEdt";
 import { dataEdtProcessing } from "../helpers/functions/dataEdtProcessing";
 import { staticDay } from "../helpers/constants/daysCode";
@@ -83,10 +87,7 @@ module.exports = {
             content: "Voici l'emploi du temps demandé !",
             embeds: arrEmbed,
             ephemeral:
-                interaction.channel?.isDMBased() === undefined ||
-                interaction.channel?.isDMBased()
-                    ? false
-                    : true,
+                interaction.channel?.type === ChannelType.DM ? false : true,
         });
     },
 };
