@@ -2,6 +2,7 @@
 import {
     Client,
     Collection,
+    EmbedBuilder,
     RESTPostAPIApplicationCommandsJSONBody,
 } from "discord.js";
 import { Database } from "firebase/database";
@@ -14,5 +15,13 @@ export interface ClientExtend extends Client {
             execute: AsyncGeneratorFunction;
         }
     >;
+    menus?: Collection<
+        string,
+        {
+            name: string;
+            execute: AsyncGeneratorFunction;
+        }
+    >;
     database?: Database;
+    links?: EmbedBuilder[];
 }
