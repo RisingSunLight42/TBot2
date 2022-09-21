@@ -87,7 +87,10 @@ module.exports = {
             content: "Voici l'emploi du temps demandé !",
             embeds: arrEmbed,
             ephemeral:
-                interaction.channel?.type === ChannelType.DM ? false : true,
+                interaction.channel?.type === ChannelType.DM ||
+                interaction.channel?.type === undefined
+                    ? false
+                    : true,
         });
     },
 };
