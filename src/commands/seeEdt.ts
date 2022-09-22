@@ -19,12 +19,8 @@ module.exports = {
                 .setName("classe")
                 .setDescription("La classe dont tu veux l'emploi du temps")
                 .addChoices(
-                    { name: "TP1 (TP1.1)", value: 1177 },
-                    { name: "TP2 (TP1.2)", value: 1179 },
-                    { name: "TP3 (TP2.1)", value: 1185 },
-                    { name: "TP4 (TP2.2)", value: 1186 },
-                    { name: "TP5 (TP3.1)", value: 1189 },
-                    { name: "TP6 (TP3.2)", value: 1191 }
+                    { name: "TP2.1", value: 1185 },
+                    { name: "TP2.2", value: 1186 }
                 )
                 .setRequired(true)
         )
