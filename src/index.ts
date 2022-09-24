@@ -44,7 +44,7 @@ const modalFiles = readdirSync(path.join(__dirname, ".", "modals")).filter(
 
 for (const file of modalFiles) {
     const modal = require(`./modals/${file}`);
-    client.menus.set(modal.name, modal);
+    client.modals.set(modal.name, modal);
 }
 
 //* Fetch events
