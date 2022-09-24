@@ -14,7 +14,7 @@ if (!guildGestionId)
 module.exports = {
     name: "ready",
     once: true,
-    execute(client: ClientExtend) {
+    async execute(client: ClientExtend) {
         console.log(`🟢 Je suis allumé !`);
 
         client.user?.setPresence({
