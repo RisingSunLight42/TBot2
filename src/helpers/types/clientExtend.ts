@@ -22,6 +22,13 @@ export interface ClientExtend extends Client {
             execute: AsyncGeneratorFunction;
         }
     >;
+    modals?: Collection<
+        string,
+        {
+            name: string;
+            execute: AsyncGeneratorFunction;
+        }
+    >;
     database?: Database;
     links?: EmbedBuilder[];
 }

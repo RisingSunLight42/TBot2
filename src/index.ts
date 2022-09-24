@@ -36,6 +36,17 @@ for (const file of menuFiles) {
     client.menus.set(menu.name, menu);
 }
 
+//* Fetch modals
+client.modals = new Collection();
+const modalFiles = readdirSync(path.join(__dirname, ".", "modals")).filter(
+    (file) => file.endsWith(".js") || file.endsWith(".ts")
+);
+
+for (const file of modalFiles) {
+    const modal = require(`./modals/${file}`);
+    client.menus.set(modal.name, modal);
+}
+
 //* Fetch events
 const eventFiles = readdirSync(path.join(__dirname, ".", "events")).filter(
     (file) => file.endsWith(".js") || file.endsWith(".ts")
