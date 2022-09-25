@@ -53,19 +53,17 @@ module.exports = {
 
         new CronJob(
             "0 0 20 * * *",
-            function () {
+            async function () {
                 if (!client.database) return;
                 const refDB = ref(client.database);
-                get(child(refDB, "dettes/")).then(async (snapshot) => {
-                    const embed = dataDettesProcessing(snapshot.val());
+                const val = (await get(child(refDB, "dettes/"))).val();
+                const embed = dataDettesProcessing(val);
 
-                    const channel = await client.channels.fetch(
-                        "1016397992674218035"
-                    );
-                    if (channel?.isTextBased()) {
-                        await channel.send({ embeds: [embed] });
-                    }
-                });
+                const channel = await client.channels.fetch(
+                    "1016397992674218035"
+                );
+                if (channel?.isTextBased())
+                    await channel.send({ embeds: [embed] });
             },
             null,
             true,

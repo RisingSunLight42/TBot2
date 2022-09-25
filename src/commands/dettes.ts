@@ -17,13 +17,8 @@ module.exports = {
             });
 
         const Dettesref = ref(client.database);
-        get(child(Dettesref, "dettes/")).then(async (snapshot) => {
-            const embed = dataDettesProcessing(snapshot.val());
-
-            await interaction.reply({
-                embeds: [embed],
-                ephemeral: true,
-            });
-        });
+        const val = (await get(child(Dettesref, "dettes/"))).val();
+        const embed = dataDettesProcessing(val);
+        return await interaction.reply({ embeds: [embed], ephemeral: true });
     },
 };
