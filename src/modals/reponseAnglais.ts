@@ -1,4 +1,5 @@
 import { ModalSubmitInteraction } from "discord.js";
+import { child, ref, set, get } from "firebase/database";
 import { ClientExtend } from "../helpers/types/clientExtend";
 
 module.exports = {
@@ -10,6 +11,15 @@ module.exports = {
             .toLowerCase();
 
         const reponseAttendue = interaction.customId.split("&")[1];
+
+        if (client.database) {
+            const refDB = ref(client.database);
+            const chemin = `statsAnglais/${interaction.user.id}/${
+                reponseAttendue === reponse ? "correct" : "incorrect"
+            }`;
+            const val = await (await get(child(refDB, chemin))).val();
+            await set(child(refDB, chemin), val === null ? 1 : val + 1);
+        }
         return await interaction.reply({
             content:
                 reponseAttendue === reponse
