@@ -29,6 +29,7 @@ export interface ClientExtend extends Client {
             execute: AsyncGeneratorFunction;
         }
     >;
+    anglais?: { [name: string]: string };
     database?: Database;
     links?: EmbedBuilder[];
 }

@@ -39,10 +39,24 @@ module.exports = {
 
         new CronJob(
             "0 0 20 * * *",
+            async function () {
+                if (!client.database) return;
+                const refDB = ref(client.database);
+                client.anglais = (await get(child(refDB, "anglais/"))).val();
+            },
+            null,
+            true,
+            "Europe/Paris",
+            this,
+            true
+        );
+
+        new CronJob(
+            "0 0 20 * * *",
             function () {
                 if (!client.database) return;
-                const Dettesref = ref(client.database);
-                get(child(Dettesref, "dettes/")).then(async (snapshot) => {
+                const refDB = ref(client.database);
+                get(child(refDB, "dettes/")).then(async (snapshot) => {
                     const embed = dataDettesProcessing(snapshot.val());
 
                     const channel = await client.channels.fetch(
