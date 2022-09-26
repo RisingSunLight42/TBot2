@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { ref, set, child } from "firebase/database";
+import { ref, set, child, get } from "firebase/database";
 import { ClientExtend } from "../helpers/types/clientExtend";
 require("dotenv").config();
 
@@ -46,17 +46,76 @@ module.exports = {
                         .setDescription("Sa traduction.")
                         .setRequired(true)
                 )
+        )
+        .addSubcommand((subcommand) =>
+            subcommand
+                .setName("liens")
+                .setDescription("Permet d'ajouter des mots à la BDD")
+                .addStringOption((option) =>
+                    option
+                        .setName("couleur")
+                        .setDescription("La couleur du site.")
+                        .addChoices(
+                            { name: "Default", value: "Default" },
+                            { name: "DarkBlue", value: "DarkBlue" },
+                            { name: "DarkPurple", value: "DarkPurple" },
+                            { name: "Purple", value: "Purple" },
+                            {
+                                name: "LuminousVividPink",
+                                value: "LuminousVividPink",
+                            },
+                            { name: "Red", value: "Red" },
+                            { name: "Orange", value: "Orange" },
+                            { name: "Yellow", value: "Yellow" },
+                            { name: "Green", value: "Green" }
+                        )
+                        .setRequired(true)
+                )
+                .addStringOption((option) =>
+                    option
+                        .setName("description")
+                        .setDescription("La description du site.")
+                        .setRequired(true)
+                )
+                .addStringOption((option) =>
+                    option
+                        .setName("image")
+                        .setDescription("L'image du site.")
+                        .setRequired(true)
+                )
+                .addStringOption((option) =>
+                    option
+                        .setName("lien")
+                        .setDescription("Le lien du site.")
+                        .setRequired(true)
+                )
+                .addStringOption((option) =>
+                    option
+                        .setName("nom")
+                        .setDescription("Le nom du site.")
+                        .setRequired(true)
+                )
         ),
 
     async execute(interaction: ChatInputCommandInteraction) {
         const client: ClientExtend = interaction.client;
+        const opt = interaction.options;
+        const gestionnaireId = process.env.GESTIONNAIRE_ID;
         if (!client.database)
             return await interaction.reply({
                 content: "Je n'ai pas pu accéder à ma BDD :c",
                 ephemeral: true,
             });
+        if (
+            gestionnaireId != interaction.user.id &&
+            opt.getSubcommand() != "dettes"
+        )
+            return await interaction.reply({
+                content:
+                    "OH ! T'es pas mon dév' toi, tu peux pas faire cette commande.",
+                ephemeral: true,
+            });
         const refDB = ref(client.database);
-        const opt = interaction.options;
         switch (opt.getSubcommand()) {
             case "dettes": {
                 const chemin = `dettes/${opt.getString(
@@ -67,18 +126,22 @@ module.exports = {
                 break;
             }
             case "anglais": {
-                const gestionnaireId = process.env.GESTIONNAIRE_ID;
-                if (gestionnaireId != interaction.user.id)
-                    return await interaction.reply({
-                        content:
-                            "OH ! T'es pas mon dév tout, tu peux pas faire cette commande.",
-                        ephemeral: true,
-                    });
                 const chemin = `anglais/${opt.getString("original", true)}`;
                 await set(
                     child(refDB, chemin),
                     opt.getString("traduction", true)
                 );
+                break;
+            }
+            case "liens": {
+                const val = await (await get(child(refDB, "liens/"))).val();
+                await set(child(refDB, `liens/${val.length}`), {
+                    couleur: opt.getString("couleur", true),
+                    description: opt.getString("description", true),
+                    image: opt.getString("image", true),
+                    lien: opt.getString("lien", true),
+                    nom: opt.getString("nom", true),
+                });
                 break;
             }
         }
