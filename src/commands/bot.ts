@@ -6,6 +6,7 @@ import {
     ButtonStyle,
 } from "discord.js";
 import { embedGenerator } from "../helpers/generators/embed";
+const pj = require("../../package.json");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -17,7 +18,7 @@ module.exports = {
             title: "EduBot",
             description:
                 "EduBot est un bot Discord réalisé principalement par RisingSunLight pour les 1ere année du BUT Informatique d'Ifs. Celui-ci est open source et est ouvert à tous ajouts de qualité.",
-            footer: { text: "Version 2.8.2" },
+            footer: { text: `Version ${pj.version}` },
         });
 
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
