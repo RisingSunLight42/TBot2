@@ -10,14 +10,13 @@ export const handleMenu = async (
     client: ClientExtend,
     interaction: SelectMenuInteraction
 ) => {
-    const menu = client.menus?.get(interaction.customId); // Récupère le menu exécuté
+    const menu = client.menus?.get(interaction.customId);
 
-    if (!menu) return; // Il ne fait rien si la commande est vide
+    if (!menu) return;
 
     try {
-        menu.execute(client, interaction); // Essaye d'exécuter l'interaction
+        menu.execute(client, interaction);
     } catch (error) {
-        // S'il y a une erreur, renvoi un message d'erreur éphémère
         console.error(error);
         const soutsu = await client.users.fetch(gestionnaireId);
         await soutsu.send(
