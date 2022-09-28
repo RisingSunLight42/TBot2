@@ -60,9 +60,18 @@ module.exports = {
             listeMotsAnglais[
                 Math.floor(listeMotsAnglais.length * Math.random())
             ];
+        const anglais_ou_francais = Math.random() > 0.5;
         const modal = new ModalBuilder()
-            .setCustomId(`reponseAnglais&${client.anglais[mot]}`)
-            .setTitle(`Traduit "${mot}" !`)
+            .setCustomId(
+                `reponseAnglais&${
+                    anglais_ou_francais ? client.anglais[mot] : mot
+                }`
+            )
+            .setTitle(
+                `Traduit en ${anglais_ou_francais ? "français" : "anglais"} "${
+                    anglais_ou_francais ? mot : client.anglais[mot]
+                }" !`
+            )
             .addComponents(
                 new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
                     new TextInputBuilder()
