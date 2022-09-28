@@ -1,4 +1,10 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ChatInputCommandInteraction,
+    SlashCommandBuilder,
+} from "discord.js";
 import { ref, set, child, get } from "firebase/database";
 import { ClientExtend } from "../helpers/types/clientExtend";
 require("dotenv").config();
@@ -101,6 +107,12 @@ module.exports = {
         const client: ClientExtend = interaction.client;
         const opt = interaction.options;
         const gestionnaireId = process.env.GESTIONNAIRE_ID;
+        if (!gestionnaireId)
+            return await interaction.reply({
+                content:
+                    "Je n'ai pas pu récupérer l'identifiant de mon développeur, je suis forcé de bloquer cette commande, désolé !",
+                ephemeral: true,
+            });
         if (!client.database)
             return await interaction.reply({
                 content: "Je n'ai pas pu accéder à ma BDD :c",
@@ -118,11 +130,39 @@ module.exports = {
         const refDB = ref(client.database);
         switch (opt.getSubcommand()) {
             case "dettes": {
-                const chemin = `dettes/${opt.getString(
-                    "endetteur",
-                    true
-                )}/${opt.getString("endette", true)}`;
-                await set(child(refDB, chemin), opt.getString("dette", true));
+                const endetteur = opt.getString("endetteur", true);
+                const endette = opt.getString("endette", true);
+                const dette = opt.getString("dette", true);
+                if (interaction.user.id != gestionnaireId) {
+                    const gestionnaireUser =
+                        await interaction.client.users.fetch(gestionnaireId);
+                    await gestionnaireUser.send({
+                        content:
+                            `<@${interaction.user.id}> veut ajouter une dette !\n` +
+                            `${endetteur} endette ${endette}, qui doit : ${dette}`,
+                        components: [
+                            new ActionRowBuilder<ButtonBuilder>().addComponents(
+                                new ButtonBuilder()
+                                    .setLabel("Accepter")
+                                    .setCustomId(
+                                        `accepterDettes&${endetteur}&${endette}&${dette}`
+                                    )
+                                    .setStyle(ButtonStyle.Success),
+                                new ButtonBuilder()
+                                    .setLabel("Refuser")
+                                    .setCustomId("refuserDettes")
+                                    .setStyle(ButtonStyle.Danger)
+                            ),
+                        ],
+                    });
+                    return interaction.reply({
+                        content:
+                            "L'enregistrement sera effectué après validation par mon développeur !",
+                        ephemeral: true,
+                    });
+                }
+                const chemin = `dettes/${endetteur}/${endette}`;
+                await set(child(refDB, chemin), dette);
                 break;
             }
             case "anglais": {
