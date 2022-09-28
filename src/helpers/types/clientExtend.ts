@@ -15,6 +15,13 @@ export interface ClientExtend extends Client {
             execute: AsyncGeneratorFunction;
         }
     >;
+    buttons?: Collection<
+        string,
+        {
+            name: string;
+            execute: AsyncGeneratorFunction;
+        }
+    >;
     menus?: Collection<
         string,
         {

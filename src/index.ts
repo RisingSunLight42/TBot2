@@ -25,6 +25,17 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 
+//* Fetch buttons
+client.buttons = new Collection();
+const buttonFiles = readdirSync(path.join(__dirname, ".", "buttons")).filter(
+    (file) => file.endsWith(".js") || file.endsWith(".ts")
+);
+
+for (const file of buttonFiles) {
+    const button = require(`./buttons/${file}`);
+    client.buttons.set(button.name, button);
+}
+
 //* Fetch menus
 client.menus = new Collection();
 const menuFiles = readdirSync(path.join(__dirname, ".", "menus")).filter(
