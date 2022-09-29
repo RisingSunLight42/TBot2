@@ -16,6 +16,9 @@ export const dataDettesProcessing = (data: {
     }
     return embedGenerator({
         title: "Les DETTES du jour",
+        description: data
+            ? ""
+            : "Il n'y a pas de dettes, bravo à tous, vous faites attention !",
         fields: arrFields,
     });
 };
