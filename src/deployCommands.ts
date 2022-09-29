@@ -1,7 +1,7 @@
-import { readdirSync } from "fs";
-import path from "path";
 import { REST } from "@discordjs/rest";
 import { Routes, RESTPostAPIApplicationCommandsJSONBody } from "discord.js";
+import { readdirSync } from "fs";
+import path from "path";
 require("dotenv").config();
 
 // Initialise les variables d'environnement
@@ -10,7 +10,9 @@ const clientToken = process.env.CLIENT_TOKEN;
 const guildGestionId = process.env.GUILD_GESTION_ID;
 
 if (!clientId || !clientToken || !guildGestionId)
-    throw new Error("One of the env variables is undefined.");
+    throw new Error("Une des variables d'environnement est indéfinie.");
+
+const rest = new REST({ version: "10" }).setToken(clientToken);
 
 export const recupFichier = () => {
     const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
@@ -24,8 +26,6 @@ export const recupFichier = () => {
     }
     return commands;
 };
-
-const rest = new REST({ version: "10" }).setToken(clientToken);
 
 export const deployCommands = async (
     commands: RESTPostAPIApplicationCommandsJSONBody[],

@@ -1,5 +1,5 @@
 import { ActivityType } from "discord.js";
-import { deployCommands, recupFichier } from "../deployCommands"; // Importe la fonction pour déployer les commandes
+import { deployCommands, recupFichier } from "../deployCommands";
 import { ClientExtend } from "../helpers/types/clientExtend";
 import { ref, get, child } from "firebase/database";
 import { dataDettesProcessing } from "../helpers/functions/dataDettesProcessing";
