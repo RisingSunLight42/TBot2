@@ -167,21 +167,25 @@ module.exports = {
             }
             case "anglais": {
                 const chemin = `anglais/${opt.getString("original", true)}`;
+                const val = await (await get(child(refDB, chemin))).val();
                 await set(
-                    child(refDB, chemin),
+                    child(refDB, chemin + `/${val ? val.length : 0}`),
                     opt.getString("traduction", true)
                 );
                 break;
             }
             case "liens": {
                 const val = await (await get(child(refDB, "liens/"))).val();
-                await set(child(refDB, `liens/${val.length}`), {
-                    couleur: opt.getString("couleur", true),
-                    description: opt.getString("description", true),
-                    image: opt.getString("image", true),
-                    lien: opt.getString("lien", true),
-                    nom: opt.getString("nom", true),
-                });
+                await set(
+                    child(refDB, `liens/${val.length ? val.length : 0}`),
+                    {
+                        couleur: opt.getString("couleur", true),
+                        description: opt.getString("description", true),
+                        image: opt.getString("image", true),
+                        lien: opt.getString("lien", true),
+                        nom: opt.getString("nom", true),
+                    }
+                );
                 break;
             }
         }

@@ -15,16 +15,18 @@ module.exports = {
         if (client.database) {
             const refDB = ref(client.database);
             const chemin = `statsAnglais/${interaction.user.id}/${
-                reponseAttendue === reponse ? "correct" : "incorrect"
+                reponseAttendue.includes(reponse) ? "correct" : "incorrect"
             }`;
             const val = await (await get(child(refDB, chemin))).val();
             await set(child(refDB, chemin), val === null ? 1 : val + 1);
         }
         return await interaction.reply({
-            content:
-                reponseAttendue === reponse
-                    ? "Bonne réponse !"
-                    : `Raté ! La réponse attendue était : \n**${reponseAttendue}**`,
+            content: reponseAttendue.includes(reponse)
+                ? "Bonne réponse !"
+                : `Raté ! La réponse attendue était : \n**${reponseAttendue.replace(
+                      ",",
+                      ", "
+                  )}**`,
             ephemeral: true,
         });
     },

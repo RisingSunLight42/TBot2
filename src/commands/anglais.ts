@@ -10,6 +10,7 @@ import {
 import { child, get, ref } from "firebase/database";
 import { ClientExtend } from "../helpers/types/clientExtend";
 import { embedGenerator } from "../helpers/generators/embed";
+import { randomArr } from "../helpers/functions/random";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -56,10 +57,7 @@ module.exports = {
             });
 
         const listeMotsAnglais = Object.keys(client.anglais);
-        const mot =
-            listeMotsAnglais[
-                Math.floor(listeMotsAnglais.length * Math.random())
-            ];
+        const mot = randomArr(listeMotsAnglais);
         const anglais_ou_francais = Math.random() > 0.5;
         const modal = new ModalBuilder()
             .setCustomId(
@@ -69,7 +67,7 @@ module.exports = {
             )
             .setTitle(
                 `Traduit en ${anglais_ou_francais ? "français" : "anglais"} "${
-                    anglais_ou_francais ? mot : client.anglais[mot]
+                    anglais_ou_francais ? mot : randomArr(client.anglais[mot])
                 }" !`
             )
             .addComponents(
