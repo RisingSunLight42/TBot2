@@ -27,7 +27,7 @@ export const dataEdtProcessing = async (
             `${anneeActuelle}-${moisActuel}-${jourVise} 12:00:00`
         );
         if ([0, 6].includes(date.getDay())) jourVise += 2;
-        if (affichage)
+        if (affichage || i === jour)
             arrDataAsked.push(
                 data.filter((data) => parseInt(data.jour) === jourVise)
             );
