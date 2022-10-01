@@ -10,7 +10,7 @@ export const souhaiteAnniv = async (client: ClientExtend) => {
         const jour = annivObj[userID].jour;
         const mois = annivObj[userID].mois;
         if (jour === date.getDate() && mois === date.getMonth() + 1) {
-            const channel = await client.channels.fetch("887737430386552892");
+            const channel = await client.channels.fetch("1016629715936755775");
             if (channel?.isTextBased())
                 await channel.send(
                     `Souhaitez un bon anniversaire à <@${userID}> !`
