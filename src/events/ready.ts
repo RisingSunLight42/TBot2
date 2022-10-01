@@ -4,6 +4,7 @@ import { ClientExtend } from "../helpers/types/clientExtend";
 import { ref, get, child } from "firebase/database";
 import { dataDettesProcessing } from "../helpers/functions/dataDettesProcessing";
 import { souhaiteAnniv } from "../helpers/functions/souhaiteAnniv";
+import { edtDuJour } from "../helpers/functions/edtDuJour";
 const CronJob = require("cron").CronJob;
 require("dotenv").config();
 
@@ -75,6 +76,16 @@ module.exports = {
             "0 0 20 * * *",
             async function () {
                 souhaiteAnniv(client);
+            },
+            null,
+            true,
+            "Europe/Paris"
+        );
+
+        new CronJob(
+            "0 0 7 * * *",
+            async function () {
+                edtDuJour(client);
             },
             null,
             true,

@@ -6,9 +6,7 @@ import {
 } from "discord.js";
 import { fetchEdt } from "../helpers/functions/fetchEdt";
 import { dataEdtProcessing } from "../helpers/functions/dataEdtProcessing";
-import { staticDay } from "../helpers/constants/daysCode";
-import { staticMonth } from "../helpers/constants/monthsCode";
-import { embedGenerator } from "../helpers/generators/embed";
+import { generateEdtEmbed } from "../helpers/functions/generateEdtEmbed";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -118,34 +116,9 @@ module.exports = {
         const edtData = await fetchEdt(infoEdt);
         const edtDataAsked = await dataEdtProcessing(edtData, jour, affichage);
 
-        const arrEmbed = [];
-        for (const jourData of edtDataAsked) {
-            if (jourData.length != 0) {
-                const numJour = parseInt(jourData[0].jour);
-                const numMonth = jourData[0].mois;
-                const year = jourData[0].annee;
-                const day = new Date(
-                    `${year}-${numMonth}-${numJour} 12:00:00`
-                ).getDay();
-                const arrFields = [];
-                for (const heureData of jourData) {
-                    arrFields.push({
-                        name: `${heureData.hDebut} - ${heureData.hFin}`,
-                        value: `${heureData.cours}\n${heureData.enseignant}\nSalle : ${heureData.salle}`,
-                    });
-                }
-                arrEmbed.push(
-                    embedGenerator({
-                        title: `Emploi du Temps du ${staticDay[day]} ${numJour} ${staticMonth[numMonth]} ${year}`,
-                        fields: arrFields,
-                    })
-                );
-            }
-        }
-
         await interaction.reply({
             content: `Voici l'emploi du temps demandé pour la ${opt.getSubcommand()} demandée !`,
-            embeds: arrEmbed,
+            embeds: await generateEdtEmbed(edtDataAsked),
             ephemeral:
                 interaction.channel?.type === ChannelType.DM ||
                 interaction.channel?.type === undefined
