@@ -142,7 +142,7 @@ module.exports = {
             });
         if (
             gestionnaireId != interaction.user.id &&
-            opt.getSubcommand() != "dettes"
+            !["dettes", "anniversaire"].includes(opt.getSubcommand())
         )
             return await interaction.reply({
                 content:
