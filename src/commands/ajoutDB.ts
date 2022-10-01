@@ -7,6 +7,7 @@ import {
 } from "discord.js";
 import { ref, set, child, get } from "firebase/database";
 import { ClientExtend } from "../helpers/types/clientExtend";
+import { staticMonthDay } from "../helpers/constants/monthsDay";
 require("dotenv").config();
 
 module.exports = {
@@ -50,6 +51,27 @@ module.exports = {
                     option
                         .setName("traduction")
                         .setDescription("Sa traduction.")
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand((subcommand) =>
+            subcommand
+                .setName("anniversaire")
+                .setDescription("Permet d'ajouter son anniversaire.")
+                .addNumberOption((option) =>
+                    option
+                        .setName("jour")
+                        .setDescription("Le jour de ton anniversaire.")
+                        .setMinValue(1)
+                        .setMaxValue(31)
+                        .setRequired(true)
+                )
+                .addNumberOption((option) =>
+                    option
+                        .setName("mois")
+                        .setDescription("Le mois de ton anniversaire.")
+                        .setMinValue(1)
+                        .setMaxValue(12)
                         .setRequired(true)
                 )
         )
@@ -186,6 +208,22 @@ module.exports = {
                         nom: opt.getString("nom", true),
                     }
                 );
+                break;
+            }
+            case "anniversaire": {
+                const jour = opt.getNumber("jour", true);
+                const mois = opt.getNumber("mois", true);
+                if (staticMonthDay[mois < 10 ? `0${mois}` : `${mois}`] < jour)
+                    return await interaction.reply({
+                        content:
+                            "Le jour que tu as donné est trop grand par rapport au mois ! Fait attention.",
+                        ephemeral: true,
+                    });
+                const chemin = `anniversaire/${interaction.user.id}`;
+                await set(child(refDB, chemin), {
+                    jour,
+                    mois,
+                });
                 break;
             }
         }

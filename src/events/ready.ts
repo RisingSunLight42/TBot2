@@ -3,6 +3,7 @@ import { deployCommands, recupFichier } from "../deployCommands";
 import { ClientExtend } from "../helpers/types/clientExtend";
 import { ref, get, child } from "firebase/database";
 import { dataDettesProcessing } from "../helpers/functions/dataDettesProcessing";
+import { souhaiteAnniv } from "../helpers/functions/souhaiteAnniv";
 const CronJob = require("cron").CronJob;
 require("dotenv").config();
 
@@ -64,6 +65,16 @@ module.exports = {
                 );
                 if (channel?.isTextBased())
                     await channel.send({ embeds: [embed] });
+            },
+            null,
+            true,
+            "Europe/Paris"
+        );
+
+        new CronJob(
+            "0 0 20 * * *",
+            async function () {
+                souhaiteAnniv(client);
             },
             null,
             true,
