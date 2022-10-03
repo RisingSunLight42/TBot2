@@ -20,7 +20,7 @@ export const handleCommand = async (
     const command = client.commands?.get(commandName);
 
     if (!command) return;
-    if (channel?.type === ChannelType.DM)
+    if (channel?.type === ChannelType.DM && commandName != "edt")
         return await interaction.reply({
             content:
                 "Je ne peux pour l'instant pas réaliser de commandes en MP !",
