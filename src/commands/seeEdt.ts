@@ -119,11 +119,10 @@ module.exports = {
         await interaction.reply({
             content: `Voici l'emploi du temps demandé pour la ${opt.getSubcommand()} demandée !`,
             embeds: await generateEdtEmbed(edtDataAsked),
-            ephemeral:
+            ephemeral: !(
                 interaction.channel?.type === ChannelType.DM ||
                 interaction.channel?.type === undefined
-                    ? false
-                    : true,
+            ),
         });
     },
 };
