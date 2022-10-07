@@ -10,7 +10,10 @@ export const handleMenu = async (
     client: ClientExtend,
     interaction: SelectMenuInteraction
 ) => {
-    const menu = client.menus?.get(interaction.customId);
+    const nom_menu = interaction.customId.includes("&")
+        ? interaction.customId.split("&")[0]
+        : interaction.customId;
+    const menu = client.menus?.get(nom_menu);
 
     if (!menu) return;
 
