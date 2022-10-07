@@ -59,7 +59,7 @@ module.exports = {
                 if (!client.database) return;
                 const refDB = ref(client.database);
                 const val = (await get(child(refDB, "dettes/"))).val();
-                const embed = dataDettesProcessing(val);
+                const embed = await dataDettesProcessing(client, val);
 
                 const channel = await client.channels.fetch(
                     "1016397992674218035"

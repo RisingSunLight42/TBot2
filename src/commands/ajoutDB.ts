@@ -20,12 +20,6 @@ module.exports = {
                 .setDescription("Permet d'ajouter des dettes à la BDD")
                 .addStringOption((option) =>
                     option
-                        .setName("endetteur")
-                        .setDescription("Celui à qui on doit la dette.")
-                        .setRequired(true)
-                )
-                .addStringOption((option) =>
-                    option
                         .setName("endette")
                         .setDescription("Celui qui doit être endetté.")
                         .setRequired(true)
@@ -152,39 +146,40 @@ module.exports = {
         const refDB = ref(client.database);
         switch (opt.getSubcommand()) {
             case "dettes": {
-                const endetteur = opt.getString("endetteur", true);
+                const endetteurId = interaction.user.id;
                 const endette = opt.getString("endette", true);
                 const dette = opt.getString("dette", true);
-                if (interaction.user.id != gestionnaireId) {
-                    const gestionnaireUser =
-                        await interaction.client.users.fetch(gestionnaireId);
-                    await gestionnaireUser.send({
-                        content:
-                            `<@${interaction.user.id}> veut ajouter une dette !\n` +
-                            `${endetteur} endette ${endette}, qui doit : ${dette}`,
-                        components: [
-                            new ActionRowBuilder<ButtonBuilder>().addComponents(
-                                new ButtonBuilder()
-                                    .setLabel("Accepter")
-                                    .setCustomId(
-                                        `accepterDettes&${endetteur}&${endette}&${dette}`
-                                    )
-                                    .setStyle(ButtonStyle.Success),
-                                new ButtonBuilder()
-                                    .setLabel("Refuser")
-                                    .setCustomId("refuserDettes")
-                                    .setStyle(ButtonStyle.Danger)
-                            ),
-                        ],
-                    });
-                    return interaction.reply({
-                        content:
-                            "L'enregistrement sera effectué après validation par mon développeur !",
-                        ephemeral: true,
-                    });
+                if (interaction.user.id === gestionnaireId) {
+                    const chemin = `dettes/${endetteurId}/${endette}`;
+                    return await set(child(refDB, chemin), dette);
                 }
-                const chemin = `dettes/${endetteur}/${endette}`;
-                await set(child(refDB, chemin), dette);
+                const gestionnaireUser = await interaction.client.users.fetch(
+                    gestionnaireId
+                );
+                await gestionnaireUser.send({
+                    content:
+                        `<@${interaction.user.id}> veut ajouter une dette !\n` +
+                        `<@${endetteurId}> endette ${endette}, qui doit : ${dette}`,
+                    components: [
+                        new ActionRowBuilder<ButtonBuilder>().addComponents(
+                            new ButtonBuilder()
+                                .setLabel("Accepter")
+                                .setCustomId(
+                                    `accepterDettes&${endetteurId}&${endette}&${dette}`
+                                )
+                                .setStyle(ButtonStyle.Success),
+                            new ButtonBuilder()
+                                .setLabel("Refuser")
+                                .setCustomId("refuserDettes")
+                                .setStyle(ButtonStyle.Danger)
+                        ),
+                    ],
+                });
+                return interaction.reply({
+                    content:
+                        "L'enregistrement sera effectué après validation par mon développeur !",
+                    ephemeral: true,
+                });
                 break;
             }
             case "anglais": {

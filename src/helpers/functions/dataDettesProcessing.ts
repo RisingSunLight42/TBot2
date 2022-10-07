@@ -1,16 +1,21 @@
 import { embedGenerator } from "../generators/embed";
+import { ClientExtend } from "../types/clientExtend";
 
-export const dataDettesProcessing = (data: {
-    [name: string]: { [name: string]: string };
-}) => {
+export const dataDettesProcessing = async (
+    client: ClientExtend,
+    data: {
+        [name: string]: { [name: string]: string };
+    }
+) => {
     const arrFields = [];
     for (const key in data) {
         let textField: string = "";
         for (const textKey of Object.keys(data[key])) {
             textField += `${textKey} : ${data[key][textKey]}\n`;
         }
+        const name = await client.users.fetch(key);
         arrFields.push({
-            name: `Pour ${key}`,
+            name: `Pour ${name.username}`,
             value: textField,
         });
     }

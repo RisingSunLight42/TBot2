@@ -18,7 +18,7 @@ module.exports = {
 
         const Dettesref = ref(client.database);
         const val = (await get(child(Dettesref, "dettes/"))).val();
-        const embed = dataDettesProcessing(val);
+        const embed = await dataDettesProcessing(client, val);
         return await interaction.reply({ embeds: [embed], ephemeral: true });
     },
 };
