@@ -151,7 +151,11 @@ module.exports = {
                 const dette = opt.getString("dette", true);
                 if (interaction.user.id === gestionnaireId) {
                     const chemin = `dettes/${endetteurId}/${endette}`;
-                    return await set(child(refDB, chemin), dette);
+                    await set(child(refDB, chemin), dette);
+                    return await interaction.reply({
+                        content: "Ajout bien réalisé !",
+                        ephemeral: true,
+                    });
                 }
                 const gestionnaireUser = await interaction.client.users.fetch(
                     gestionnaireId
