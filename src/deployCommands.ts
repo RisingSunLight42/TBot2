@@ -32,7 +32,6 @@ export const deployCommands = async (
     global: boolean
 ) => {
     try {
-        console.log(commands);
         await rest.put(
             global
                 ? Routes.applicationCommands(clientId)
