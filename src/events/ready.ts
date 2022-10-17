@@ -85,7 +85,17 @@ module.exports = {
         new CronJob(
             "0 0 6 * * *",
             async function () {
-                edtDuJour(client);
+                edtDuJour(client, 0);
+            },
+            null,
+            true,
+            "Europe/Paris"
+        );
+
+        new CronJob(
+            "0 0 20 * * *",
+            async function () {
+                edtDuJour(client, 1);
             },
             null,
             true,
