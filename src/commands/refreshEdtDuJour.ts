@@ -7,7 +7,7 @@ if (!gestionnaireID) throw new Error("L'ID du gestionnaire est manquant !");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("refreshEdt")
+        .setName("refreshedt")
         .setDescription("Permet de refresh l'EdT du jour.")
         .addNumberOption((option) =>
             option
