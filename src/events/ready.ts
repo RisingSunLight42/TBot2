@@ -76,7 +76,7 @@ module.exports = {
             "0 0 20 * * *",
             async function () {
                 souhaiteAnniv(client);
-                edtDuJour(client, 1);
+                edtDuJour(client, 1, false);
             },
             null,
             true,
@@ -86,7 +86,7 @@ module.exports = {
         new CronJob(
             "0 0 6 * * *",
             async function () {
-                edtDuJour(client, 0);
+                edtDuJour(client, 0, false);
             },
             null,
             true,

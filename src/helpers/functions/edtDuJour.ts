@@ -4,10 +4,13 @@ import { dataEdtProcessing } from "./dataEdtProcessing";
 import { fetchEdt } from "./fetchEdt";
 import { generateEdtEmbed } from "./generateEdtEmbed";
 
-export const edtDuJour = async (client: ClientExtend, offset: number) => {
+export const edtDuJour = async (
+    client: ClientExtend,
+    offset: number,
+    bypass: boolean
+) => {
     const day = new Date(Date.now()).getDay();
-    if (([0, 6].includes(day) && offset === 0) || (day === 6 && offset === 1))
-        return;
+    if ([0, 6].includes(day) && !bypass) return;
     const channel = await client.channels.fetch("1025734566067048498");
     if (channel?.type != ChannelType.GuildText) return;
     channel.bulkDelete(5);
