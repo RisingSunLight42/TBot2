@@ -106,6 +106,13 @@ module.exports = {
                 )
         ),
     async execute(interaction: ChatInputCommandInteraction) {
+        await interaction.reply({
+            content: "Chargement de l'Emploi du Temps...",
+            ephemeral: !(
+                interaction.channel?.type === ChannelType.DM ||
+                interaction.channel?.type === undefined
+            ),
+        });
         const opt = interaction.options;
         const infoEdt =
             opt.getSubcommand() === "classe"
@@ -116,13 +123,9 @@ module.exports = {
         const edtData = await fetchEdt(infoEdt);
         const edtDataAsked = await dataEdtProcessing(edtData, jour, affichage);
 
-        await interaction.reply({
+        await interaction.editReply({
             content: `Voici l'emploi du temps demandé pour la ${opt.getSubcommand()} demandée !`,
             embeds: await generateEdtEmbed(edtDataAsked),
-            ephemeral: !(
-                interaction.channel?.type === ChannelType.DM ||
-                interaction.channel?.type === undefined
-            ),
         });
     },
 };
