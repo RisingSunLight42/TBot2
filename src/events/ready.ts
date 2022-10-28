@@ -42,40 +42,20 @@ module.exports = {
         new CronJob(
             "0 0 20 * * *",
             async function () {
+                souhaiteAnniv(client);
+
                 if (!client.database) return;
                 const refDB = ref(client.database);
                 client.anglais = (await get(child(refDB, "anglais/"))).val();
-            },
-            null,
-            true,
-            "Europe/Paris",
-            this,
-            true
-        );
-
-        new CronJob(
-            "0 0 20 * * *",
-            async function () {
-                if (!client.database) return;
-                const refDB = ref(client.database);
                 const val = (await get(child(refDB, "dettes/"))).val();
                 const embed = await dataDettesProcessing(client, val);
-
                 const channel = await client.channels.fetch(
                     "1016397992674218035"
                 );
                 if (channel?.isTextBased())
                     await channel.send({ embeds: [embed] });
-            },
-            null,
-            true,
-            "Europe/Paris"
-        );
 
-        new CronJob(
-            "0 0 20 * * *",
-            async function () {
-                souhaiteAnniv(client);
+                if (!(await get(child(refDB, "edtParam/"))).val()) return;
                 edtDuJour(client, 1, false);
             },
             null,
@@ -86,6 +66,9 @@ module.exports = {
         new CronJob(
             "0 0 6 * * *",
             async function () {
+                if (!client.database) return;
+                const refDB = ref(client.database);
+                if (!(await get(child(refDB, "edtParam/"))).val()) return;
                 edtDuJour(client, 0, false);
             },
             null,
