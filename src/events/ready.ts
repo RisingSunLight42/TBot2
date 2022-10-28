@@ -1,10 +1,12 @@
 import { ActivityType } from "discord.js";
 import { deployCommands, recupFichier } from "../deployCommands";
 import { ClientExtend } from "../helpers/types/clientExtend";
-import { ref, get, child } from "firebase/database";
+import { ref, get, child, set } from "firebase/database";
 import { dataDettesProcessing } from "../helpers/functions/dataDettesProcessing";
 import { souhaiteAnniv } from "../helpers/functions/souhaiteAnniv";
 import { edtDuJour } from "../helpers/functions/edtDuJour";
+import { readFileSync } from "fs";
+import path from "path";
 const CronJob = require("cron").CronJob;
 require("dotenv").config();
 
@@ -70,6 +72,60 @@ module.exports = {
                 const refDB = ref(client.database);
                 if (!(await get(child(refDB, "edtParam/"))).val()) return;
                 edtDuJour(client, 0, false);
+            },
+            null,
+            true,
+            "Europe/Paris"
+        );
+
+        new CronJob(
+            "0 0 0 * * *",
+            async function () {
+                const minute = Math.floor(Math.random() * 60);
+                const heure = Math.floor(Math.random() * 23);
+                if (client.tempsMotRandom)
+                    client.tempsMotRandom = { minute, heure };
+            },
+            null,
+            true,
+            "Europe/Paris"
+        );
+
+        new CronJob(
+            "0 * * * * *",
+            async function () {
+                if (!client.tempsMotRandom || !client.database) return;
+                const temps = client.tempsMotRandom;
+                const date = new Date();
+                if (
+                    temps.minute != date.getMinutes() ||
+                    temps.heure != date.getHours()
+                )
+                    return;
+                const arrWord = readFileSync(
+                    path.join(
+                        __dirname,
+                        ".",
+                        "helpers/misc/pizza_chevre_rotule_base_planisphere.txt"
+                    ),
+                    "utf-8"
+                ).split("\r\n");
+                const refDB = ref(client.database);
+                const val: string[] = (await get(child(refDB, "mots/"))).val();
+                arrWord.filter((value) => !val.includes(value));
+                const mot = arrWord[Math.floor(Math.random() * arrWord.length)];
+                const guild = await client.guilds.fetch("1016387121717706882");
+                const salons = (await guild.channels.fetch()).filter(
+                    (channel) =>
+                        ![
+                            "1025734566067048498",
+                            "1019670097100537877",
+                        ].includes(channel.id) && channel.isTextBased()
+                );
+                const salon = salons.random();
+                if (!salon) return;
+                if (salon.isTextBased()) salon.send(mot);
+                await set(child(refDB, `mots/${val.length}`), mot);
             },
             null,
             true,

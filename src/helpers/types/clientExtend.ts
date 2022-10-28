@@ -39,4 +39,8 @@ export interface ClientExtend extends Client {
     anglais?: { [name: string]: Array<string> };
     database?: Database;
     links?: EmbedBuilder[];
+    tempsMotRandom?: {
+        minute: number;
+        heure: number;
+    };
 }
