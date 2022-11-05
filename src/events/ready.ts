@@ -44,8 +44,6 @@ module.exports = {
         new CronJob(
             "0 0 20 * * *",
             async function () {
-                souhaiteAnniv(client);
-
                 if (!client.database) return;
                 const refDB = ref(client.database);
                 client.anglais = (await get(child(refDB, "anglais/"))).val();
@@ -81,6 +79,7 @@ module.exports = {
         new CronJob(
             "0 0 0 * * *",
             async function () {
+                souhaiteAnniv(client);
                 const minute = Math.floor(Math.random() * 60);
                 const heure = Math.floor(Math.random() * 23);
                 if (client.tempsMotRandom)
