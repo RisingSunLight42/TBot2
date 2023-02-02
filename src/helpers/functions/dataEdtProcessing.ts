@@ -48,6 +48,7 @@ export const dataEdtProcessing = async (
             );*/
         jourVise += 1;
     }
+    console.log("aled", arrDataAsked);
 
     return arrDataAsked;
 };
