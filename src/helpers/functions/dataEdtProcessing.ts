@@ -29,7 +29,11 @@ export const dataEdtProcessing = async (
         if ([0, 6].includes(date.getDay())) jourVise += 2;
         if (affichage || i === jour)
             arrDataAsked.push(
-                data.filter((data) => parseInt(data.jour) === jourVise)
+                data.filter(
+                    (data) =>
+                        parseInt(data.jour) === jourVise &&
+                        parseInt(data.mois) === parseInt(moisActuel)
+                )
             );
         jourVise += 1;
     }
