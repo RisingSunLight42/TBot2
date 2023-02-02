@@ -28,27 +28,17 @@ export const dataEdtProcessing = async (
         );
         if ([0, 6].includes(date.getDay())) jourVise += 2;
         if (affichage || i === jour) {
-            const arrPush = [];
-            for (const element of data) {
-                if (
-                    parseInt(element.jour) === jourVise &&
-                    parseInt(element.mois) === parseInt(moisActuel)
-                ) {
-                    arrPush.push(element);
-                }
-            }
-            arrDataAsked.push(arrPush);
-        }
-        /*arrDataAsked.push(
+            arrDataAsked.push(
                 data.filter(
                     (data) =>
                         parseInt(data.jour) === jourVise &&
                         parseInt(data.mois) === parseInt(moisActuel)
                 )
-            );*/
+            );
+        }
+
         jourVise += 1;
     }
-    console.log("aled", arrDataAsked);
 
     return arrDataAsked;
 };
