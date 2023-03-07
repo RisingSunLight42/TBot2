@@ -18,12 +18,20 @@ export const edtDuJour = async (
     const edtDataTP1Asked = await dataEdtProcessing(edtDataTP1, offset, false);
     const edtDataTP2 = await fetchEdt(1186);
     const edtDataTP2Asked = await dataEdtProcessing(edtDataTP2, offset, false);
+    const embedTP1 = await generateEdtEmbed(edtDataTP1Asked);
+    const embedTP2 = await generateEdtEmbed(edtDataTP2Asked);
     await channel.send({
-        content: "Voici l'emploi du temps du TP2.1 !",
-        embeds: await generateEdtEmbed(edtDataTP1Asked),
+        content:
+            embedTP1.length === 0
+                ? "Il semblerait que les TP2.1 n'ont pas cours aujourd'hui !"
+                : "Voici l'emploi du temps du TP2.1 !",
+        embeds: embedTP1,
     });
     await channel.send({
-        content: "Voici l'emploi du temps du TP2.2 !",
-        embeds: await generateEdtEmbed(edtDataTP2Asked),
+        content:
+            embedTP1.length === 0
+                ? "Il semblerait que les TP2.1 n'ont pas cours aujourd'hui !"
+                : "Voici l'emploi du temps du TP2.2 !",
+        embeds: embedTP2,
     });
 };
