@@ -23,7 +23,7 @@ export const edtDuJour = async (
     await channel.send({
         content:
             embedTP1.length === 0
-                ? `Il semblerait que les TP2.1 n'ont pas cours ${
+                ? `Il semblerait que les TP2.1 n'aient pas cours ${
                       offset === 1 ? "demain" : "aujourd'hui !"
                   }`
                 : "Voici l'emploi du temps du TP2.1 !",
@@ -32,7 +32,7 @@ export const edtDuJour = async (
     await channel.send({
         content:
             embedTP2.length === 0
-                ? `Il semblerait que les TP2.2 n'ont pas cours ${
+                ? `Il semblerait que les TP2.2 n'aient pas cours ${
                       offset === 1 ? "demain" : "aujourd'hui !"
                   }`
                 : "Voici l'emploi du temps du TP2.2 !",
