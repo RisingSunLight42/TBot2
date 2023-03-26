@@ -15,14 +15,6 @@ export const generateEdtEmbed = async (edtDataAsked: Data[][]) => {
             ).getDay();
             const arrFields = [];
             for (const heureData of jourData) {
-                heureData.hDebut =
-                    (parseInt(heureData.hDebut.split(":")[0]) + 1).toString() +
-                    ":" +
-                    heureData.hDebut.split(":")[1];
-                heureData.hFin =
-                    (parseInt(heureData.hFin.split(":")[0]) + 1).toString() +
-                    ":" +
-                    heureData.hFin.split(":")[1];
                 arrFields.push({
                     name: `${heureData.hDebut} - ${heureData.hFin}`,
                     value: `${heureData.cours}\n${heureData.enseignant}\nSalle : ${heureData.salle}`,
