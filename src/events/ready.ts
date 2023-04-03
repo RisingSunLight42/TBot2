@@ -47,13 +47,6 @@ module.exports = {
                 if (!client.database) return;
                 const refDB = ref(client.database);
                 client.anglais = (await get(child(refDB, "anglais/"))).val();
-                const val = (await get(child(refDB, "dettes/"))).val();
-                const embed = await dataDettesProcessing(client, val);
-                const channel = await client.channels.fetch(
-                    "1016387732181889094"
-                );
-                if (channel?.isTextBased())
-                    await channel.send({ embeds: [embed] });
 
                 if (!(await get(child(refDB, "edtParam/"))).val()) return;
                 edtDuJour(client, 1, false);
