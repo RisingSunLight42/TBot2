@@ -50,7 +50,7 @@ module.exports = {
                 const val = (await get(child(refDB, "dettes/"))).val();
                 const embed = await dataDettesProcessing(client, val);
                 const channel = await client.channels.fetch(
-                    "1016397992674218035"
+                    "1016387732181889094"
                 );
                 if (channel?.isTextBased())
                     await channel.send({ embeds: [embed] });
