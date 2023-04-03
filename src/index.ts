@@ -11,7 +11,7 @@ require("dotenv").config();
 const clientToken = process.env.CLIENT_TOKEN;
 
 const client: ClientExtend = new Client({
-    intents: [GatewayIntentBits.Guilds],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
 });
 
 //* Fetch commands
