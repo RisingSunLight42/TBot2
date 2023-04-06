@@ -107,11 +107,14 @@ module.exports = {
                 const mot = arrWord[Math.floor(Math.random() * arrWord.length)];
                 const guild = await client.guilds.fetch("1016387121717706882");
                 const salons = (await guild.channels.fetch()).filter(
-                    (channel) =>
-                        ![
-                            "1025734566067048498",
-                            "1019670097100537877",
-                        ].includes(channel.id) && channel.isTextBased()
+                    (channel) => {
+                        if (channel) {
+                            ![
+                                "1025734566067048498",
+                                "1019670097100537877",
+                            ].includes(channel.id) && channel.isTextBased();
+                        }
+                    }
                 );
                 const salon = salons.random();
                 if (!salon) return;

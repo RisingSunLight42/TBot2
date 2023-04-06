@@ -2,7 +2,7 @@ import {
     ButtonInteraction,
     ChatInputCommandInteraction,
     ModalSubmitInteraction,
-    SelectMenuInteraction,
+    StringSelectMenuInteraction,
 } from "discord.js";
 import { handleButton } from "../helpers/handlers/button";
 import { handleCommand } from "../helpers/handlers/command";
@@ -14,7 +14,7 @@ module.exports = {
     async execute(
         interaction:
             | ChatInputCommandInteraction
-            | SelectMenuInteraction
+            | StringSelectMenuInteraction
             | ModalSubmitInteraction
             | ButtonInteraction
     ) {
@@ -22,7 +22,7 @@ module.exports = {
             await handleCommand(interaction.client, interaction);
         else if (interaction.isButton())
             await handleButton(interaction.client, interaction);
-        else if (interaction.isSelectMenu())
+        else if (interaction.isStringSelectMenu())
             await handleMenu(interaction.client, interaction);
         else if (interaction.isModalSubmit())
             await handleModal(interaction.client, interaction);

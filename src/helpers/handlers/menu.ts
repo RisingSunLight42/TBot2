@@ -1,4 +1,4 @@
-import { SelectMenuInteraction } from "discord.js"; // Import des classes nécessaires pour les boutons
+import { StringSelectMenuInteraction } from "discord.js"; // Import des classes nécessaires pour les boutons
 import { ClientExtend } from "../types/clientExtend";
 require("dotenv").config();
 
@@ -8,7 +8,7 @@ if (!gestionnaireId) throw new Error("L'ID de Soutsu est manquant !");
 
 export const handleMenu = async (
     client: ClientExtend,
-    interaction: SelectMenuInteraction
+    interaction: StringSelectMenuInteraction
 ) => {
     const nom_menu = interaction.customId.includes("&")
         ? interaction.customId.split("&")[0]

@@ -1,9 +1,13 @@
-import { SelectMenuInteraction } from "discord.js";
+import { StringSelectMenuInteraction } from "discord.js";
 import { ClientExtend } from "../helpers/types/clientExtend";
 
 module.exports = {
     name: "linksSelect",
-    async execute(client: ClientExtend, interaction: SelectMenuInteraction) {
+    async execute(
+        client: ClientExtend,
+        interaction: StringSelectMenuInteraction
+    ) {
+        console.log("a");
         if (!client.links)
             return await interaction.reply({
                 content: "Je n'ai pas pu récupérer les liens :/",

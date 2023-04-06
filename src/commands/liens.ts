@@ -2,7 +2,7 @@ import {
     ActionRowBuilder,
     ChatInputCommandInteraction,
     EmbedBuilder,
-    SelectMenuBuilder,
+    StringSelectMenuBuilder,
     SlashCommandBuilder,
 } from "discord.js";
 import { ref, get, child } from "firebase/database";
@@ -31,11 +31,12 @@ module.exports = {
             });
 
         const arrEmbed: EmbedBuilder[] = [];
-        const row = new ActionRowBuilder<SelectMenuBuilder>().addComponents(
-            new SelectMenuBuilder()
-                .setCustomId("linksSelect")
-                .setPlaceholder("Aucun lien sélectionné")
-        );
+        const row =
+            new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+                new StringSelectMenuBuilder()
+                    .setCustomId("linksSelect")
+                    .setPlaceholder("Aucun lien sélectionné")
+            );
         const choix = interaction.options.getBoolean("choix", true);
         const Liensref = ref(client.database);
         const sites = (await get(child(Liensref, "liens/"))).val();

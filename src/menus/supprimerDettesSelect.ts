@@ -1,10 +1,13 @@
-import { SelectMenuInteraction } from "discord.js";
+import { StringSelectMenuInteraction } from "discord.js";
 import { ref, child, remove } from "firebase/database";
 import { ClientExtend } from "../helpers/types/clientExtend";
 
 module.exports = {
     name: "supprimerDettesSelect",
-    async execute(client: ClientExtend, interaction: SelectMenuInteraction) {
+    async execute(
+        client: ClientExtend,
+        interaction: StringSelectMenuInteraction
+    ) {
         const message = await interaction.channel?.messages.fetch(
             interaction.customId.split("&")[1]
         );

@@ -2,7 +2,7 @@ import {
     ChatInputCommandInteraction,
     SlashCommandBuilder,
     ActionRowBuilder,
-    SelectMenuBuilder,
+    StringSelectMenuBuilder,
 } from "discord.js";
 import { ref, child, get } from "firebase/database";
 import { ClientExtend } from "../helpers/types/clientExtend";
@@ -42,7 +42,7 @@ module.exports = {
             content: "Choisi l'élément à retirer !",
         });
 
-        const selectMenu = new SelectMenuBuilder()
+        const selectMenu = new StringSelectMenuBuilder()
             .setCustomId(`supprimerDettesSelect&${message?.id}`)
             .setPlaceholder("Rien n'a été sélectionné.");
         for (const key of Object.keys(val)) {
@@ -55,7 +55,7 @@ module.exports = {
 
         await message?.edit({
             components: [
-                new ActionRowBuilder<SelectMenuBuilder>().addComponents(
+                new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
                     selectMenu
                 ),
             ],

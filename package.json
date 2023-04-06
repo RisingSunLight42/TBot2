@@ -1,6 +1,6 @@
 {
     "name": "edubot",
-    "version": "2.27.0",
+    "version": "2.28.0",
     "description": "EduBot est un bot Discord réalisé principalement par RisingSunLight pour les 1ere année du BUT Informatique d'Ifs. Celui-ci est open source et est ouvert à tous ajouts de qualité.",
     "main": "dist/index.js",
     "scripts": {
@@ -21,7 +21,7 @@
         "@discordjs/rest": "^1.1.0",
         "axios": "^0.27.2",
         "cron": "^2.1.0",
-        "discord.js": "^14.3.0",
+        "discord.js": "^14.9.0",
         "dotenv": "^16.0.2",
         "firebase": "^9.10.0"
     },
