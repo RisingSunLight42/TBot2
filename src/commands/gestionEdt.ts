@@ -12,17 +12,14 @@ module.exports = {
         .setName("gestion")
         .setDescription("Permet de gérer certains éléments du bot."),
 
-    async execute(interaction: ChatInputCommandInteraction) {
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         if (interaction.user.id != gestionnaireID)
             return interaction.reply({
                 content:
                     "Tu n'es pas mon développeur, tu n'as pas le droit de faire cette commande !",
-                ephemeral: true,
-            });
-        const client: ClientExtend = interaction.client;
-        if (!client.database)
-            return await interaction.reply({
-                content: "Je n'ai pas pu trouver ma base de données :/",
                 ephemeral: true,
             });
 

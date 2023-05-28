@@ -6,6 +6,7 @@ import {
     ButtonStyle,
 } from "discord.js";
 import { embedGenerator } from "../helpers/generators/embed";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 const pj = require("../../package.json");
 
 module.exports = {
@@ -13,7 +14,10 @@ module.exports = {
         .setName("bot")
         .setDescription("Permet d'avoir les liens relatifs au bot aisément."),
 
-    async execute(interaction: ChatInputCommandInteraction) {
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         const embed = embedGenerator({
             title: "EduBot",
             description:

@@ -8,28 +8,28 @@ import {
 import { Database } from "firebase/database";
 
 export interface ClientExtend extends Client {
-    commands?: Collection<
+    commands: Collection<
         string,
         {
             data: RESTPostAPIApplicationCommandsJSONBody;
             execute: AsyncGeneratorFunction;
         }
     >;
-    buttons?: Collection<
+    buttons: Collection<
         string,
         {
             name: string;
             execute: AsyncGeneratorFunction;
         }
     >;
-    menus?: Collection<
+    menus: Collection<
         string,
         {
             name: string;
             execute: AsyncGeneratorFunction;
         }
     >;
-    modals?: Collection<
+    modals: Collection<
         string,
         {
             name: string;
@@ -37,7 +37,7 @@ export interface ClientExtend extends Client {
         }
     >;
     anglais?: { [name: string]: Array<string> };
-    database?: Database;
+    database: Database;
     links?: EmbedBuilder[];
     tempsMotRandom?: {
         minute: number;

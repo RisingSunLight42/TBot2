@@ -18,14 +18,16 @@ module.exports = {
                 .setRequired(true)
         ),
 
-    async execute(interaction: ChatInputCommandInteraction) {
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         if (interaction.user.id != gestionnaireID)
             return await interaction.reply({
                 content:
                     "Cette commande est réservée à mon développeur, tu ne peux pas l'utiliser !",
                 ephemeral: true,
             });
-        const client: ClientExtend = interaction.client;
         await edtDuJour(
             client,
             interaction.options.getNumber("offset", true),

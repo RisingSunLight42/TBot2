@@ -25,9 +25,11 @@ module.exports = {
                 .setRequired(true)
         ),
 
-    async execute(interaction: ChatInputCommandInteraction) {
-        const client: ClientExtend = interaction.client;
-        if (interaction.options.getBoolean("score", true) && client.database) {
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
+        if (interaction.options.getBoolean("score", true)) {
             const refDB = ref(client.database);
             const val: { [name: string]: number } = await (
                 await get(child(refDB, `statsAnglais/${interaction.user.id}`))

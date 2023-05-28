@@ -17,7 +17,7 @@ export const handleCommand = async (
 ) => {
     const { commandName, options, channel, memberPermissions, user } =
         interaction;
-    const command = client.commands?.get(commandName);
+    const command = client.commands.get(commandName);
 
     if (!command) return;
     if (channel?.type === ChannelType.DM && commandName != "edt")
@@ -49,7 +49,7 @@ export const handleCommand = async (
 
     //* Exécution de la commande, avec catch en cas d'erreur
     try {
-        command.execute(interaction);
+        command.execute(client, interaction);
     } catch (error) {
         console.error(error);
         const gestionnaire = await client.users.fetch(gestionnaireId);

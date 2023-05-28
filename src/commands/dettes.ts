@@ -8,14 +8,10 @@ module.exports = {
         .setName("dettes")
         .setDescription("Permet de voir les dettes actuelles des élèves."),
 
-    async execute(interaction: ChatInputCommandInteraction) {
-        const client: ClientExtend = interaction.client;
-        if (!client.database)
-            return await interaction.reply({
-                content: "Je n'ai pas pu trouver ma base de données :/",
-                ephemeral: true,
-            });
-
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         const Dettesref = ref(client.database);
         const val = (await get(child(Dettesref, "dettes/"))).val();
         const embed = await dataDettesProcessing(client, val);

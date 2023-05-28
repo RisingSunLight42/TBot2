@@ -7,6 +7,7 @@ import {
 import { fetchEdt } from "../helpers/functions/fetchEdt";
 import { dataEdtProcessing } from "../helpers/functions/dataEdtProcessing";
 import { generateEdtEmbed } from "../helpers/functions/generateEdtEmbed";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -105,7 +106,10 @@ module.exports = {
                         .setRequired(true)
                 )
         ),
-    async execute(interaction: ChatInputCommandInteraction) {
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         await interaction.reply({
             content: "Chargement de l'Emploi du Temps...",
             ephemeral: !(

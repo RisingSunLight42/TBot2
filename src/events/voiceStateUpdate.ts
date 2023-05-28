@@ -1,8 +1,13 @@
 import { ChannelType, VoiceState } from "discord.js";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 
 module.exports = {
     name: "voiceStateUpdate",
-    async execute(oldState: VoiceState, newState: VoiceState) {
+    async execute(
+        client: ClientExtend,
+        oldState: VoiceState,
+        newState: VoiceState
+    ) {
         const sourceVoiceChannelID = "1092542204389621790";
         const sourceCategoryID = "1092539867092762776";
         if (newState.channelId === sourceVoiceChannelID) {

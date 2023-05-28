@@ -3,6 +3,7 @@ import {
     morseVersTexte,
     texteVersMorse,
 } from "../helpers/constants/morseTranslation";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -36,7 +37,10 @@ module.exports = {
                 )
         ),
 
-    async execute(interaction: ChatInputCommandInteraction) {
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         let texteATraduire = interaction.options.getString("texte", true);
         let texteRetour = "";
         if (interaction.options.getSubcommand() === "morse") {

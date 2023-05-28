@@ -18,18 +18,15 @@ module.exports = {
                 .setDescription("Permet de supprimer une dette à la BDD.")
         ),
 
-    async execute(interaction: ChatInputCommandInteraction) {
-        const client: ClientExtend = interaction.client;
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         const gestionnaireId = process.env.GESTIONNAIRE_ID;
         if (!gestionnaireId)
             return await interaction.reply({
                 content:
                     "Je n'ai pas pu récupérer l'identifiant de mon développeur, je suis forcé de bloquer cette commande, désolé !",
-                ephemeral: true,
-            });
-        if (!client.database)
-            return await interaction.reply({
-                content: "Je n'ai pas pu accéder à ma BDD :c",
                 ephemeral: true,
             });
 

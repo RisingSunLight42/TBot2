@@ -22,14 +22,10 @@ module.exports = {
                 .setRequired(true)
         ),
 
-    async execute(interaction: ChatInputCommandInteraction) {
-        const client: ClientExtend = interaction.client;
-        if (!client.database)
-            return await interaction.reply({
-                content: "Je n'ai pas pu trouver ma base de données :/",
-                ephemeral: true,
-            });
-
+    async execute(
+        client: ClientExtend,
+        interaction: ChatInputCommandInteraction
+    ) {
         const arrEmbed: EmbedBuilder[] = [];
         const row =
             new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
