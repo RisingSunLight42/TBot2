@@ -1,5 +1,5 @@
 import { ModalSubmitInteraction } from "discord.js";
-import { ClientExtend } from "../types/clientExtend";
+import { ClientExtend } from "../types/ClientExtend";
 require("dotenv").config();
 
 const gestionnaireId = process.env.GESTIONNAIRE_ID;

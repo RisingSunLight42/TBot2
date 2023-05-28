@@ -1,6 +1,6 @@
 import { ActivityType } from "discord.js";
 import { deployCommands, recupFichier } from "../deployCommands";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 import { ref, get, child, set } from "firebase/database";
 import { souhaiteAnniv } from "../helpers/functions/souhaiteAnniv";
 import { edtDuJour } from "../helpers/functions/edtDuJour";

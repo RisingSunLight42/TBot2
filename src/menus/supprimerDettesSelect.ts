@@ -1,6 +1,6 @@
 import { StringSelectMenuInteraction } from "discord.js";
 import { ref, child, remove } from "firebase/database";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 
 module.exports = {
     name: "supprimerDettesSelect",

@@ -1,6 +1,6 @@
 import { ModalSubmitInteraction } from "discord.js";
 import { child, ref, set, get } from "firebase/database";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 
 module.exports = {
     name: "reponseAnglais",

@@ -1,5 +1,5 @@
 import { ButtonInteraction } from "discord.js";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 
 module.exports = {
     name: "refuserDettes",

@@ -1,5 +1,5 @@
 import { ChannelType } from "discord.js";
-import { ClientExtend } from "../types/clientExtend";
+import { ClientExtend } from "../types/ClientExtend";
 import { dataEdtProcessing } from "./dataEdtProcessing";
 import { fetchEdt } from "./fetchEdt";
 import { generateEdtEmbed } from "./generateEdtEmbed";

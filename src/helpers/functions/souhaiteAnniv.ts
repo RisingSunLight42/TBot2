@@ -1,4 +1,4 @@
-import { ClientExtend } from "../types/clientExtend";
+import { ClientExtend } from "../types/ClientExtend";
 import { ref, child, get } from "firebase/database";
 
 export const souhaiteAnniv = async (client: ClientExtend) => {

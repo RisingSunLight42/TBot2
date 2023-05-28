@@ -1,5 +1,5 @@
 import { ChannelType, ChatInputCommandInteraction } from "discord.js";
-import { ClientExtend } from "../types/clientExtend";
+import { ClientExtend } from "../types/ClientExtend";
 import {
     permissionsObject,
     permissionsSubcommandObject,

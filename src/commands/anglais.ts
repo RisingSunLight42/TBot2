@@ -8,7 +8,7 @@ import {
     ModalActionRowComponentBuilder,
 } from "discord.js";
 import { child, get, ref } from "firebase/database";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 import { embedGenerator } from "../helpers/generators/embed";
 import { randomArr } from "../helpers/functions/random";
 

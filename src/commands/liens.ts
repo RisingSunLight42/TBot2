@@ -6,7 +6,7 @@ import {
     SlashCommandBuilder,
 } from "discord.js";
 import { ref, get, child } from "firebase/database";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 import { embedGenerator } from "../helpers/generators/embed";
 
 module.exports = {

@@ -1,5 +1,5 @@
 import { embedGenerator } from "../generators/embed";
-import { ClientExtend } from "../types/clientExtend";
+import { ClientExtend } from "../types/ClientExtend";
 
 export const dataDettesProcessing = async (
     client: ClientExtend,

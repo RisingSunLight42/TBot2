@@ -1,5 +1,5 @@
 import { StringSelectMenuInteraction } from "discord.js";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 
 module.exports = {
     name: "linksSelect",

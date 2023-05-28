@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { edtDuJour } from "../helpers/functions/edtDuJour";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 const gestionnaireID = process.env.GESTIONNAIRE_ID;
 
 if (!gestionnaireID) throw new Error("L'ID du gestionnaire est manquant !");

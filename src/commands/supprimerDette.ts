@@ -5,7 +5,7 @@ import {
     StringSelectMenuBuilder,
 } from "discord.js";
 import { ref, child, get } from "firebase/database";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 require("dotenv").config();
 
 module.exports = {

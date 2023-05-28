@@ -6,7 +6,7 @@ import {
     SlashCommandBuilder,
 } from "discord.js";
 import { ref, set, child, get } from "firebase/database";
-import { ClientExtend } from "../helpers/types/clientExtend";
+import { ClientExtend } from "../helpers/types/ClientExtend";
 import { staticMonthDay } from "../helpers/constants/monthsDay";
 require("dotenv").config();
 
