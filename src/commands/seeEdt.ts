@@ -8,6 +8,7 @@ import { fetchEdt } from "../helpers/functions/fetchEdt";
 import { dataEdtProcessing } from "../helpers/functions/dataEdtProcessing";
 import { generateEdtEmbed } from "../helpers/functions/generateEdtEmbed";
 import { ClientExtend } from "../helpers/types/ClientExtend";
+import { edtGroupCode } from "../helpers/constants/edtGroupCode";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,8 +25,8 @@ module.exports = {
                             "La classe dont tu veux l'emploi du temps"
                         )
                         .addChoices(
-                            { name: "TP2.1", value: 1185 },
-                            { name: "TP2.2", value: 1186 }
+                            { name: "TP2.1", value: edtGroupCode["tp1"] },
+                            { name: "TP2.2", value: edtGroupCode["tp2"] }
                         )
                         .setRequired(true)
                 )

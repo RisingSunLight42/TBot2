@@ -3,6 +3,7 @@ import { ClientExtend } from "../types/ClientExtend";
 import { dataEdtProcessing } from "./dataEdtProcessing";
 import { fetchEdt } from "./fetchEdt";
 import { generateEdtEmbed } from "./generateEdtEmbed";
+import { edtGroupCode } from "../constants/edtGroupCode";
 
 export const edtDuJour = async (
     client: ClientExtend,
@@ -14,9 +15,9 @@ export const edtDuJour = async (
     const channel = await client.channels.fetch("1025734566067048498");
     if (channel?.type != ChannelType.GuildText) return;
     channel.bulkDelete(5);
-    const edtDataTP1 = await fetchEdt(1185);
+    const edtDataTP1 = await fetchEdt(edtGroupCode["tp1"]);
     const edtDataTP1Asked = await dataEdtProcessing(edtDataTP1, offset, false);
-    const edtDataTP2 = await fetchEdt(1186);
+    const edtDataTP2 = await fetchEdt(edtGroupCode["tp2"]);
     const edtDataTP2Asked = await dataEdtProcessing(edtDataTP2, offset, false);
     const embedTP1 = await generateEdtEmbed(edtDataTP1Asked);
     const embedTP2 = await generateEdtEmbed(edtDataTP2Asked);
