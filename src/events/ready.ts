@@ -6,6 +6,7 @@ import { souhaiteAnniv } from "../helpers/functions/souhaiteAnniv";
 import { edtDuJour } from "../helpers/functions/edtDuJour";
 import { readFileSync } from "fs";
 import path from "path";
+import { meteoOfTheDay } from "../helpers/functions/meteoOfTheDay";
 const CronJob = require("cron").CronJob;
 require("dotenv").config();
 
@@ -48,7 +49,8 @@ module.exports = {
                 client.anglais = (await get(child(refDB, "anglais/"))).val();
 
                 if (!(await get(child(refDB, "edtParam/"))).val()) return;
-                edtDuJour(client, 1, false);
+                await edtDuJour(client, 1, false);
+                await meteoOfTheDay(client, 1);
             },
             null,
             true,
@@ -61,7 +63,8 @@ module.exports = {
                 if (!client.database) return;
                 const refDB = ref(client.database);
                 if (!(await get(child(refDB, "edtParam/"))).val()) return;
-                edtDuJour(client, 0, false);
+                await edtDuJour(client, 0, false);
+                await meteoOfTheDay(client, 0);
             },
             null,
             true,
