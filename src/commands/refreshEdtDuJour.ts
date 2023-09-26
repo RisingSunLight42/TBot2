@@ -1,6 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { edtDuJour } from "../helpers/functions/edtDuJour";
 import { ClientExtend } from "../helpers/types/ClientExtend";
+import { meteoOfTheDay } from "../helpers/functions/meteoOfTheDay";
 const gestionnaireID = process.env.GESTIONNAIRE_ID;
 
 if (!gestionnaireID) throw new Error("L'ID du gestionnaire est manquant !");
@@ -28,11 +29,9 @@ module.exports = {
                     "Cette commande est réservée à mon développeur, tu ne peux pas l'utiliser !",
                 ephemeral: true,
             });
-        await edtDuJour(
-            client,
-            interaction.options.getNumber("offset", true),
-            true
-        );
+        const offset = interaction.options.getNumber("offset", true);
+        await edtDuJour(client, offset, true);
+        await meteoOfTheDay(client, offset);
         await interaction.reply({
             content: "Refresh avec succès !",
             ephemeral: true,
