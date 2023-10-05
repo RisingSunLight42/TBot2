@@ -16,12 +16,12 @@ module.exports = {
                 .setMinValue(0)
                 .setMaxValue(1)
                 .setDescription("L'offset à appliquer au refresh")
-                .setRequired(true)
+                .setRequired(true),
         ),
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         if (interaction.user.id != gestionnaireID)
             return await interaction.reply({

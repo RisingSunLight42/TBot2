@@ -17,21 +17,21 @@ module.exports = {
             option
                 .setName("choix")
                 .setDescription(
-                    "Veux-tu avoir le choix sur les liens que tu souhaites voir ?"
+                    "Veux-tu avoir le choix sur les liens que tu souhaites voir ?",
                 )
-                .setRequired(true)
+                .setRequired(true),
         ),
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         const arrEmbed: EmbedBuilder[] = [];
         const row =
             new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
                 new StringSelectMenuBuilder()
                     .setCustomId("linksSelect")
-                    .setPlaceholder("Aucun lien sélectionné")
+                    .setPlaceholder("Aucun lien sélectionné"),
             );
         const choix = interaction.options.getBoolean("choix", true);
         const Liensref = ref(client.database);
@@ -44,7 +44,7 @@ module.exports = {
                     description: site.description,
                     url: site.lien,
                     thumbnail: site.image,
-                })
+                }),
             );
 
             row.components[0].addOptions({

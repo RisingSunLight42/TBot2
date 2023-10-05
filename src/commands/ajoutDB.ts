@@ -22,14 +22,14 @@ module.exports = {
                     option
                         .setName("endette")
                         .setDescription("Celui qui doit être endetté.")
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addStringOption((option) =>
                     option
                         .setName("dette")
                         .setDescription("Le détail de la dette.")
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .addSubcommand((subcommand) =>
             subcommand
@@ -39,14 +39,14 @@ module.exports = {
                     option
                         .setName("original")
                         .setDescription("Le mot original en anglais.")
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addStringOption((option) =>
                     option
                         .setName("traduction")
                         .setDescription("Sa traduction.")
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .addSubcommand((subcommand) =>
             subcommand
@@ -58,7 +58,7 @@ module.exports = {
                         .setDescription("Le jour de ton anniversaire.")
                         .setMinValue(1)
                         .setMaxValue(31)
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addNumberOption((option) =>
                     option
@@ -66,8 +66,8 @@ module.exports = {
                         .setDescription("Le mois de ton anniversaire.")
                         .setMinValue(1)
                         .setMaxValue(12)
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .addSubcommand((subcommand) =>
             subcommand
@@ -89,39 +89,39 @@ module.exports = {
                             { name: "Red", value: "Red" },
                             { name: "Orange", value: "Orange" },
                             { name: "Yellow", value: "Yellow" },
-                            { name: "Green", value: "Green" }
+                            { name: "Green", value: "Green" },
                         )
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addStringOption((option) =>
                     option
                         .setName("description")
                         .setDescription("La description du site.")
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addStringOption((option) =>
                     option
                         .setName("image")
                         .setDescription("L'image du site.")
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addStringOption((option) =>
                     option
                         .setName("lien")
                         .setDescription("Le lien du site.")
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addStringOption((option) =>
                     option
                         .setName("nom")
                         .setDescription("Le nom du site.")
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         ),
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         const opt = interaction.options;
         const gestionnaireId = process.env.GESTIONNAIRE_ID;
@@ -155,7 +155,7 @@ module.exports = {
                     });
                 }
                 const gestionnaireUser = await interaction.client.users.fetch(
-                    gestionnaireId
+                    gestionnaireId,
                 );
                 await gestionnaireUser.send({
                     content:
@@ -166,13 +166,13 @@ module.exports = {
                             new ButtonBuilder()
                                 .setLabel("Accepter")
                                 .setCustomId(
-                                    `accepterDettes&${endetteurId}&${endette}&${dette}`
+                                    `accepterDettes&${endetteurId}&${endette}&${dette}`,
                                 )
                                 .setStyle(ButtonStyle.Success),
                             new ButtonBuilder()
                                 .setLabel("Refuser")
                                 .setCustomId("refuserDettes")
-                                .setStyle(ButtonStyle.Danger)
+                                .setStyle(ButtonStyle.Danger),
                         ),
                     ],
                 });
@@ -188,7 +188,7 @@ module.exports = {
                 const val = await (await get(child(refDB, chemin))).val();
                 await set(
                     child(refDB, chemin + `/${val ? val.length : 0}`),
-                    opt.getString("traduction", true)
+                    opt.getString("traduction", true),
                 );
                 break;
             }
@@ -202,7 +202,7 @@ module.exports = {
                         image: opt.getString("image", true),
                         lien: opt.getString("lien", true),
                         nom: opt.getString("nom", true),
-                    }
+                    },
                 );
                 break;
             }

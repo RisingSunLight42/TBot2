@@ -54,7 +54,7 @@ module.exports = {
             },
             null,
             true,
-            "Europe/Paris"
+            "Europe/Paris",
         );
 
         new CronJob(
@@ -68,7 +68,7 @@ module.exports = {
             },
             null,
             true,
-            "Europe/Paris"
+            "Europe/Paris",
         );
 
         new CronJob(
@@ -82,7 +82,7 @@ module.exports = {
             },
             null,
             true,
-            "Europe/Paris"
+            "Europe/Paris",
         );
 
         new CronJob(
@@ -100,9 +100,9 @@ module.exports = {
                     path.join(
                         __dirname,
                         ".",
-                        "helpers/misc/pizza_chevre_rotule_base_planisphere.txt"
+                        "helpers/misc/pizza_chevre_rotule_base_planisphere.txt",
                     ),
-                    "utf-8"
+                    "utf-8",
                 ).split("\r\n");
                 const refDB = ref(client.database);
                 const val: string[] = (await get(child(refDB, "mots/"))).val();
@@ -117,7 +117,7 @@ module.exports = {
                                 "1019670097100537877",
                             ].includes(channel.id) && channel.isTextBased();
                         }
-                    }
+                    },
                 );
                 const salon = salons.random();
                 if (!salon) return;
@@ -126,7 +126,7 @@ module.exports = {
             },
             null,
             true,
-            "Europe/Paris"
+            "Europe/Paris",
         );
     },
 };

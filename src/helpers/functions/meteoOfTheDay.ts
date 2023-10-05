@@ -11,7 +11,7 @@ export const meteoOfTheDay = async (client: ClientExtend, day: number) => {
     const channel = await client.channels.fetch("1025734566067048498");
     if (channel?.type != ChannelType.GuildText) return;
     const meteo = await axios.get(
-        `https://api.meteo-concept.com/api/forecast/daily/${day}?token=${meteoToken}&insee=14341`
+        `https://api.meteo-concept.com/api/forecast/daily/${day}?token=${meteoToken}&insee=14341`,
     );
     const forecast = meteo.data.forecast;
     const embed = embedGenerator({

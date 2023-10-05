@@ -13,7 +13,7 @@ if (!gestionnaireId) throw new Error("L'ID du gestionnaire est manquant !");
  */
 export const handleModal = async (
     client: ClientExtend,
-    interaction: ModalSubmitInteraction
+    interaction: ModalSubmitInteraction,
 ) => {
     const nom_modal = interaction.customId.includes("&")
         ? interaction.customId.split("&")[0]
@@ -28,7 +28,7 @@ export const handleModal = async (
         console.error(error);
         const gestionnaire = await client.users.fetch(gestionnaireId);
         await gestionnaire.send(
-            `Une erreur a été rencontrée lors de l'utilisation du modal ${interaction.customId} par ${interaction.user.tag}.`
+            `Une erreur a été rencontrée lors de l'utilisation du modal ${interaction.customId} par ${interaction.user.tag}.`,
         );
         await interaction.reply({
             content:

@@ -13,7 +13,7 @@ if (!gestionnaireId) throw new Error("L'ID du gestionnaire est manquant !");
 
 export const handleCommand = async (
     client: ClientExtend,
-    interaction: ChatInputCommandInteraction
+    interaction: ChatInputCommandInteraction,
 ) => {
     const { commandName, options, channel, memberPermissions, user } =
         interaction;
@@ -37,7 +37,7 @@ export const handleCommand = async (
                       //* Les cas particuliers peuvent fonctionner via SubcommandGroup ou Subcommand
                       (options.getSubcommandGroup()
                           ? options.getSubcommandGroup()
-                          : options.getSubcommand()) ?? "STRING_GUARD"
+                          : options.getSubcommand()) ?? "STRING_GUARD",
                   )
                 : true)
         )
@@ -54,7 +54,7 @@ export const handleCommand = async (
         console.error(error);
         const gestionnaire = await client.users.fetch(gestionnaireId);
         await gestionnaire.send(
-            `Une erreur a été rencontrée lors de l'utilisation de la commande ${commandName} par ${user.tag}.`
+            `Une erreur a été rencontrée lors de l'utilisation de la commande ${commandName} par ${user.tag}.`,
         );
         await interaction.reply({
             content:

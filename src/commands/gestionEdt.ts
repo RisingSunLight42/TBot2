@@ -14,7 +14,7 @@ module.exports = {
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         if (interaction.user.id != gestionnaireID)
             return interaction.reply({

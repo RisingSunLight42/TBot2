@@ -21,8 +21,8 @@ module.exports = {
                             option
                                 .setName("texte")
                                 .setDescription("Le texte à traduire.")
-                                .setRequired(true)
-                        )
+                                .setRequired(true),
+                        ),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
@@ -32,14 +32,14 @@ module.exports = {
                             option
                                 .setName("texte")
                                 .setDescription("Le texte à traduire.")
-                                .setRequired(true)
-                        )
-                )
+                                .setRequired(true),
+                        ),
+                ),
         ),
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         let texteATraduire = interaction.options.getString("texte", true);
         let texteRetour = "";

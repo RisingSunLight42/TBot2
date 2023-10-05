@@ -8,7 +8,7 @@ import { edtGroupCode } from "../constants/edtGroupCode";
 export const edtDuJour = async (
     client: ClientExtend,
     offset: number,
-    bypass: boolean
+    bypass: boolean,
 ) => {
     const day = new Date(Date.now()).getDay();
     if ([0, 6].includes(day) && !bypass) return;

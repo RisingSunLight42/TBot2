@@ -6,7 +6,7 @@ module.exports = {
     async execute(
         client: ClientExtend,
         oldState: VoiceState,
-        newState: VoiceState
+        newState: VoiceState,
     ) {
         const sourceVoiceChannelID = "1092542204389621790";
         const sourceCategoryID = "1092539867092762776";
@@ -22,7 +22,7 @@ module.exports = {
 
             newState.setChannel(
                 duplicateChannel,
-                "Déplacement sur le salon dupliqué"
+                "Déplacement sur le salon dupliqué",
             );
         } else if (
             newState.channelId === null &&

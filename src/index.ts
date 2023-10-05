@@ -25,7 +25,7 @@ const collectionsObject: {
 
 for (let [type, value] of Object.entries(collectionsObject)) {
     const files = readdirSync(path.join(__dirname, ".", type)).filter(
-        (file) => file.endsWith(".js") || file.endsWith(".ts")
+        (file) => file.endsWith(".js") || file.endsWith(".ts"),
     );
     for (const file of files) {
         const component = require(`./${type}/${file}`);
@@ -38,7 +38,7 @@ Object.assign(client, collectionsObject);
 Object.assign(client, { database: getDatabase(initializeApp(firebaseConfig)) });
 
 const eventFiles = readdirSync(path.join(__dirname, ".", "events")).filter(
-    (file) => file.endsWith(".js") || file.endsWith(".ts")
+    (file) => file.endsWith(".js") || file.endsWith(".ts"),
 );
 
 for (const file of eventFiles) {
@@ -52,7 +52,7 @@ for (const file of eventFiles) {
 
 if (!isClientExtend(client))
     throw new Error(
-        "Client object is not properly extended, one of the required property is missing."
+        "Client object is not properly extended, one of the required property is missing.",
     );
 
 client.login(clientToken);

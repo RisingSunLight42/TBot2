@@ -13,7 +13,7 @@ export const souhaiteAnniv = async (client: ClientExtend) => {
             const channel = await client.channels.fetch("1016629715936755775");
             if (channel?.isTextBased())
                 await channel.send(
-                    `Souhaitez un bon anniversaire à <@${userID}> !`
+                    `Souhaitez un bon anniversaire à <@${userID}> !`,
                 );
         }
     }

@@ -15,12 +15,12 @@ module.exports = {
         .addSubcommand((subcommand) =>
             subcommand
                 .setName("dettes")
-                .setDescription("Permet de supprimer une dette à la BDD.")
+                .setDescription("Permet de supprimer une dette à la BDD."),
         ),
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         const gestionnaireId = process.env.GESTIONNAIRE_ID;
         if (!gestionnaireId)
@@ -53,7 +53,7 @@ module.exports = {
         await message?.edit({
             components: [
                 new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-                    selectMenu
+                    selectMenu,
                 ),
             ],
         });

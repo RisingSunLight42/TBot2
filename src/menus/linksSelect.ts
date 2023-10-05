@@ -5,7 +5,7 @@ module.exports = {
     name: "linksSelect",
     async execute(
         client: ClientExtend,
-        interaction: StringSelectMenuInteraction
+        interaction: StringSelectMenuInteraction,
     ) {
         console.log("a");
         if (!client.links)
@@ -15,7 +15,7 @@ module.exports = {
             });
         await interaction.reply({
             embeds: client.links.filter(
-                (embed) => embed.data.title === interaction.values[0]
+                (embed) => embed.data.title === interaction.values[0],
             ),
             ephemeral: true,
         });

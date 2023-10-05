@@ -10,7 +10,7 @@ module.exports = {
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         const Dettesref = ref(client.database);
         const val = (await get(child(Dettesref, "dettes/"))).val();

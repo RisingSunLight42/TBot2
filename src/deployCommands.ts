@@ -17,7 +17,7 @@ const rest = new REST({ version: "10" }).setToken(clientToken);
 export const recupFichier = () => {
     const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
     const commandFiles = readdirSync(
-        path.join(__dirname, ".", "commands")
+        path.join(__dirname, ".", "commands"),
     ).filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
 
     for (const file of commandFiles) {
@@ -29,7 +29,7 @@ export const recupFichier = () => {
 
 export const deployCommands = async (
     commands: RESTPostAPIApplicationCommandsJSONBody[],
-    global: boolean
+    global: boolean,
 ) => {
     try {
         await rest.put(
@@ -38,12 +38,12 @@ export const deployCommands = async (
                 : Routes.applicationGuildCommands(clientId, guildGestionId),
             {
                 body: commands,
-            }
+            },
         );
         console.log(
             `🧪 Les commandes (/) ${
                 global ? "globales" : "du serveur de gestion"
-            } ont été enregistrées.`
+            } ont été enregistrées.`,
         );
     } catch (error) {
         console.error(error);

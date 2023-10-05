@@ -8,7 +8,7 @@ if (!gestionnaireId) throw new Error("L'ID de Soutsu est manquant !");
 
 export const handleButton = async (
     client: ClientExtend,
-    interaction: ButtonInteraction
+    interaction: ButtonInteraction,
 ) => {
     const nom_button = interaction.customId.includes("&")
         ? interaction.customId.split("&")[0]
@@ -23,7 +23,7 @@ export const handleButton = async (
         console.error(error);
         const soutsu = await client.users.fetch(gestionnaireId);
         await soutsu.send(
-            `Une erreur a été rencontrée lors de l'utilisation du bouton ${interaction.customId} par ${interaction.user.tag}.`
+            `Une erreur a été rencontrée lors de l'utilisation du bouton ${interaction.customId} par ${interaction.user.tag}.`,
         );
         await interaction.reply({
             content:

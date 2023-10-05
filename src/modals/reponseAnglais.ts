@@ -25,7 +25,7 @@ module.exports = {
                 ? "Bonne réponse !"
                 : `Raté ! La réponse attendue était : \n**${reponseAttendue.replace(
                       ",",
-                      ", "
+                      ", ",
                   )}**`,
             ephemeral: true,
         });

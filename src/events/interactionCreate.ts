@@ -18,7 +18,7 @@ module.exports = {
             | ChatInputCommandInteraction
             | StringSelectMenuInteraction
             | ModalSubmitInteraction
-            | ButtonInteraction
+            | ButtonInteraction,
     ) {
         if (interaction.isCommand()) await handleCommand(client, interaction);
         else if (interaction.isButton())

@@ -22,19 +22,19 @@ module.exports = {
                     option
                         .setName("classe")
                         .setDescription(
-                            "La classe dont tu veux l'emploi du temps"
+                            "La classe dont tu veux l'emploi du temps",
                         )
                         .addChoices(
                             { name: "TP2.1", value: edtGroupCode["tp1"] },
-                            { name: "TP2.2", value: edtGroupCode["tp2"] }
+                            { name: "TP2.2", value: edtGroupCode["tp2"] },
                         )
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addNumberOption((option) =>
                     option
                         .setName("jour")
                         .setDescription(
-                            "La semaine ne prend pas en compte les W-E, donc aujourd'hui en weed-end donnera Lundi !"
+                            "La semaine ne prend pas en compte les W-E, donc aujourd'hui en weed-end donnera Lundi !",
                         )
                         .addChoices(
                             { name: "Aujourd'hui", value: 0 },
@@ -42,18 +42,18 @@ module.exports = {
                             { name: "+ 2 jours", value: 2 },
                             { name: "+ 3 jours", value: 3 },
                             { name: "+ 4 jours", value: 4 },
-                            { name: "+ 5 jours", value: 5 }
+                            { name: "+ 5 jours", value: 5 },
                         )
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addBooleanOption((option) =>
                     option
                         .setName("affichage")
                         .setDescription(
-                            "Dois-je afficher les jours intermédiaires ou pas ?"
+                            "Dois-je afficher les jours intermédiaires ou pas ?",
                         )
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         )
         .addSubcommand((subcommand) =>
             subcommand
@@ -63,7 +63,7 @@ module.exports = {
                     option
                         .setName("salle")
                         .setDescription(
-                            "La salle dont tu veux l'emploi du temps"
+                            "La salle dont tu veux l'emploi du temps",
                         )
                         .addChoices(
                             { name: "1106", value: 38541 },
@@ -78,15 +78,15 @@ module.exports = {
                             { name: "2237", value: 39005 },
                             { name: "2240", value: 140414 },
                             { name: "Labo de langues", value: 38713 },
-                            { name: "Labo multimédia", value: 24132 }
+                            { name: "Labo multimédia", value: 24132 },
                         )
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addNumberOption((option) =>
                     option
                         .setName("jour")
                         .setDescription(
-                            "La semaine ne prend pas en compte les W-E, donc aujourd'hui en weed-end donnera Lundi !"
+                            "La semaine ne prend pas en compte les W-E, donc aujourd'hui en weed-end donnera Lundi !",
                         )
                         .addChoices(
                             { name: "Aujourd'hui", value: 0 },
@@ -94,22 +94,22 @@ module.exports = {
                             { name: "+ 2 jours", value: 2 },
                             { name: "+ 3 jours", value: 3 },
                             { name: "+ 4 jours", value: 4 },
-                            { name: "+ 5 jours", value: 5 }
+                            { name: "+ 5 jours", value: 5 },
                         )
-                        .setRequired(true)
+                        .setRequired(true),
                 )
                 .addBooleanOption((option) =>
                     option
                         .setName("affichage")
                         .setDescription(
-                            "Dois-je afficher les jours intermédiaires ou pas ?"
+                            "Dois-je afficher les jours intermédiaires ou pas ?",
                         )
-                        .setRequired(true)
-                )
+                        .setRequired(true),
+                ),
         ),
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         await interaction.reply({
             content: "Chargement de l'Emploi du Temps...",

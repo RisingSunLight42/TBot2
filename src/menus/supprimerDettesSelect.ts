@@ -6,10 +6,10 @@ module.exports = {
     name: "supprimerDettesSelect",
     async execute(
         client: ClientExtend,
-        interaction: StringSelectMenuInteraction
+        interaction: StringSelectMenuInteraction,
     ) {
         const message = await interaction.channel?.messages.fetch(
-            interaction.customId.split("&")[1]
+            interaction.customId.split("&")[1],
         );
         if (!client.database)
             return await message?.edit({

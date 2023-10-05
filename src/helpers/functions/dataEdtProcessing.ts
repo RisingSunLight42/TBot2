@@ -4,7 +4,7 @@ import { staticMonthDay } from "../constants/monthsDay";
 export const dataEdtProcessing = async (
     data: Data[],
     jour: number,
-    affichage: boolean
+    affichage: boolean,
 ) => {
     let jourVise = parseInt(data[0].jour);
     let moisActuel = data[0].mois;
@@ -24,7 +24,7 @@ export const dataEdtProcessing = async (
                     : `${parseInt(moisActuel) + 1}`;
         }
         const date = new Date(
-            `${anneeActuelle}-${moisActuel}-${jourVise} 12:00:00`
+            `${anneeActuelle}-${moisActuel}-${jourVise} 12:00:00`,
         );
         if ([0, 6].includes(date.getDay())) jourVise += 2;
         if (affichage || i === jour) {
@@ -32,8 +32,8 @@ export const dataEdtProcessing = async (
                 data.filter(
                     (data) =>
                         parseInt(data.jour) === jourVise &&
-                        parseInt(data.mois) === parseInt(moisActuel)
-                )
+                        parseInt(data.mois) === parseInt(moisActuel),
+                ),
             );
         }
 

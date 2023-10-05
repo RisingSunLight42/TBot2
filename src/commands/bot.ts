@@ -16,7 +16,7 @@ module.exports = {
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         const embed = embedGenerator({
             title: "EduBot",
@@ -33,15 +33,15 @@ module.exports = {
             new ButtonBuilder()
                 .setLabel("Signaler un bug")
                 .setURL(
-                    "https://github.com/RisingSunLight42/EduBot/issues/new?assignees=RisingSunLight42&labels=bug&template=rapport-de-bug.md&title=BUG"
+                    "https://github.com/RisingSunLight42/EduBot/issues/new?assignees=RisingSunLight42&labels=bug&template=rapport-de-bug.md&title=BUG",
                 )
                 .setStyle(ButtonStyle.Link),
             new ButtonBuilder()
                 .setLabel("Demander un ajout")
                 .setURL(
-                    "https://github.com/RisingSunLight42/EduBot/issues/new?assignees=RisingSunLight42&labels=ajout&template=demande-d-ajout.md&title=AJOUT"
+                    "https://github.com/RisingSunLight42/EduBot/issues/new?assignees=RisingSunLight42&labels=ajout&template=demande-d-ajout.md&title=AJOUT",
                 )
-                .setStyle(ButtonStyle.Link)
+                .setStyle(ButtonStyle.Link),
         );
 
         await interaction.reply({

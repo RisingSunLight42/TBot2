@@ -20,14 +20,14 @@ module.exports = {
             option
                 .setName("score")
                 .setDescription(
-                    "Permet de voir son score en anglais si activé !"
+                    "Permet de voir son score en anglais si activé !",
                 )
-                .setRequired(true)
+                .setRequired(true),
         ),
 
     async execute(
         client: ClientExtend,
-        interaction: ChatInputCommandInteraction
+        interaction: ChatInputCommandInteraction,
     ) {
         if (interaction.options.getBoolean("score", true)) {
             const refDB = ref(client.database);
@@ -65,12 +65,12 @@ module.exports = {
             .setCustomId(
                 `reponseAnglais&${
                     anglais_ou_francais ? client.anglais[mot] : mot
-                }`
+                }`,
             )
             .setTitle(
                 `Traduit en ${anglais_ou_francais ? "français" : "anglais"} "${
                     anglais_ou_francais ? mot : randomArr(client.anglais[mot])
-                }" !`
+                }" !`,
             )
             .addComponents(
                 new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
@@ -78,8 +78,8 @@ module.exports = {
                         .setCustomId("reponse")
                         .setRequired(true)
                         .setLabel("Traduction")
-                        .setStyle(TextInputStyle.Short)
-                )
+                        .setStyle(TextInputStyle.Short),
+                ),
             );
         return await interaction.showModal(modal);
     },

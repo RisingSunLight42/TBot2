@@ -1,4 +1,4 @@
-import { StringSelectMenuInteraction } from "discord.js"; // Import des classes nécessaires pour les boutons
+import { StringSelectMenuInteraction } from "discord.js";
 import { ClientExtend } from "../types/ClientExtend";
 require("dotenv").config();
 
@@ -8,7 +8,7 @@ if (!gestionnaireId) throw new Error("L'ID de Soutsu est manquant !");
 
 export const handleMenu = async (
     client: ClientExtend,
-    interaction: StringSelectMenuInteraction
+    interaction: StringSelectMenuInteraction,
 ) => {
     const nom_menu = interaction.customId.includes("&")
         ? interaction.customId.split("&")[0]
@@ -23,7 +23,7 @@ export const handleMenu = async (
         console.error(error);
         const soutsu = await client.users.fetch(gestionnaireId);
         await soutsu.send(
-            `Une erreur a été rencontrée lors de l'utilisation du menu ${interaction.customId} par ${interaction.user.tag}.`
+            `Une erreur a été rencontrée lors de l'utilisation du menu ${interaction.customId} par ${interaction.user.tag}.`,
         );
         await interaction.reply({
             content:
