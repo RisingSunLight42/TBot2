@@ -11,7 +11,7 @@ export const generateEdtEmbed = async (edtDataAsked: Data[][]) => {
             const numMonth = jourData[0].mois;
             const year = jourData[0].annee;
             const day = new Date(
-                `${year}-${numMonth}-${numJour} 12:00:00`
+                `${year}-${numMonth}-${numJour} 12:00:00`,
             ).getDay();
             const arrFields = [];
             for (const heureData of jourData) {
@@ -24,7 +24,7 @@ export const generateEdtEmbed = async (edtDataAsked: Data[][]) => {
                 embedGenerator({
                     title: `Emploi du Temps du ${staticDay[day]} ${numJour} ${staticMonth[numMonth]} ${year}`,
                     fields: arrFields,
-                })
+                }),
             );
         }
     }

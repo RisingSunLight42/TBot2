@@ -43,7 +43,7 @@ module.exports = {
 
         new CronJob(
             "0 0 20 * * *",
-            async function () {
+            async function() {
                 if (!client.database) return;
                 const refDB = ref(client.database);
                 client.anglais = (await get(child(refDB, "anglais/"))).val();
@@ -59,7 +59,7 @@ module.exports = {
 
         new CronJob(
             "0 0 6 * * *",
-            async function () {
+            async function() {
                 if (!client.database) return;
                 const refDB = ref(client.database);
                 if (!(await get(child(refDB, "edtParam/"))).val()) return;
@@ -87,7 +87,7 @@ module.exports = {
 
         new CronJob(
             "0 * * * * *",
-            async function () {
+            async function() {
                 if (!client.tempsMotRandom || !client.database) return;
                 const temps = client.tempsMotRandom;
                 const date = new Date();

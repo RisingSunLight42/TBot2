@@ -5,7 +5,7 @@ export const dataDettesProcessing = async (
     client: ClientExtend,
     data: {
         [name: string]: { [name: string]: string };
-    }
+    },
 ) => {
     const arrFields = [];
     for (const key in data) {

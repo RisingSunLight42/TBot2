@@ -33,7 +33,7 @@ export const dataEdtProcessing = async (
                     (data) =>
                         parseInt(data.jour) === jourVise &&
                         parseInt(data.mois) === parseInt(moisActuel),
-                ),
+                )
             );
         }
 
