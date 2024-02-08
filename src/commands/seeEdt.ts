@@ -79,6 +79,7 @@ module.exports = {
                             { name: "2240", value: 140414 },
                             { name: "Labo de langues", value: 38713 },
                             { name: "Labo multimédia", value: 24132 },
+                            { name: "Amphithéâtre", value: 39294 },
                         )
                         .setRequired(true),
                 )
