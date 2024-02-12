@@ -14,7 +14,7 @@ export const edtDuJour = async (
     if ([0, 6].includes(day) && !bypass) return;
     const channel = await client.channels.fetch("1025734566067048498");
     if (channel?.type != ChannelType.GuildText) return;
-    channel.bulkDelete(5);
+    await channel.bulkDelete(5);
     const edtDataTP1 = await fetchEdt(edtGroupCode["tp1"]);
     const edtDataTP1Asked = await dataEdtProcessing(edtDataTP1, offset, false);
     const edtDataTP2 = await fetchEdt(edtGroupCode["tp2"]);
