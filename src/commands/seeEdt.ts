@@ -76,9 +76,11 @@ module.exports = {
                             { name: "2235", value: 37590 },
                             { name: "2236", value: 38484 },
                             { name: "2237", value: 39005 },
-                            { name: "2240", value: 140414 },
+                            { name: "Salle de réunion (2240)", value: 140414 },
                             { name: "Labo de langues", value: 38713 },
                             { name: "Labo multimédia", value: 24132 },
+                            { name: "Salle LP (2123)", value: 39568 },
+                            { name: "Salle TP réseau (2125)", value: 39646 },
                             { name: "Amphithéâtre", value: 39294 },
                         )
                         .setRequired(true),
@@ -127,6 +129,9 @@ module.exports = {
         const jour = opt.getNumber("jour", true);
         const affichage = opt.getBoolean("affichage", true);
         const edtData = await fetchEdt(infoEdt);
+        if (edtData.length === 0) {
+            return await interaction.editReply({ content: "Il n'y actuellement aucun créneau prévu pour cette salle !"})
+        }
         const edtDataAsked = await dataEdtProcessing(edtData, jour, affichage);
 
         await interaction.editReply({
