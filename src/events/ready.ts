@@ -72,13 +72,13 @@ module.exports = {
         );
 
         new CronJob(
-            "0 0 0 * * *",
+            "0 0 6 * * *",
             async function () {
                 souhaiteAnniv(client);
-                const minute = Math.floor(Math.random() * 60);
+                /*const minute = Math.floor(Math.random() * 60);
                 const heure = Math.floor(Math.random() * 23);
                 if (client.tempsMotRandom)
-                    client.tempsMotRandom = { minute, heure };
+                    client.tempsMotRandom = { minute, heure };*/
             },
             null,
             true,
